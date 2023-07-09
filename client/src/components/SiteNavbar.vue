@@ -1,10 +1,10 @@
 <template>
     <nav class="navbar navbar-expand-lg fixed-top navbar-scroll">
         <div class="container-fluid" >
-            <div class="row">
-                <img src="public/img/logo/logo.png" class="col p-0 logo" height="64" alt="Tutoko Logo" loading="lazy" />
-                <h3 class="brand col p-0 mb-0">Tutoko</h3>
-            </div>
+                <a class="navbar-brand d-flex" href="#">
+                    <img src="public/img/logo/logo.png" alt="Logo" width="64" class="d-inline-block align-text-top">
+                    <h3 class="brand p-0 mb-0">Tutoko</h3>
+                </a>
             <button 
                 class="menu-toggle"
                 @click="showRightnav"
@@ -102,35 +102,11 @@ export default {
     display: none;
 }
 
-/* Color of the links BEFORE scroll
-.navbar-scroll .nav-link,
-.navbar-scroll .fa-bars,
-.navbar-scroll .navar-brand {
-    color: #4f4f4f;
+.nav-link:focus-visible {
+    outline: 0;
+    box-shadow: none;
 }
 
-.navbar-scroll .nav-link:hover {
-    color: #1266f1;
-}
-.navbar-scrolled .nav-link,
-.navbar-scrolled .fa-bars,
-.navbar-scrolled .navar-brand {
-    color: #4f4f4f;
-}
-
-.navbar-scroll,
-.navbar-scrolled {
-    background-color: #fff;
-}
-
-.navbar.navbar-scroll.navbar-scrolled {
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
-body {
-    background-color: #eee;
-} */
 
 
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
