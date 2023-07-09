@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col h-screen">
         <SiteNavBar/>
-        <main>
+        <main style="margin-top: 90px">
             <RouterView />
         </main>
         <SiteFooter/>

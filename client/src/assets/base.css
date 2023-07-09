@@ -36,6 +36,17 @@
     --section-gap: 160px;
 }
 
+/* color primary */
+:root {
+    --color-blue: #0675E8;
+    --color-blue-dark: #1A5DB6;
+    --color-blue-darkest: #203856;
+    --color-gray-dark: #A7A9AC;
+    --color-gray-light: #D1D3D4;
+    --color-blue-light: #E1EAF6;
+    --color-white: #F6FCFF;
+}
+
 @media (prefers-color-scheme: dark) {
     :root {
         --color-background: var(--vt-c-black);

@@ -28,9 +28,9 @@
                         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
                             <h6 class="text-uppercase mb-4 font-weight-bold text-title">Công cụ</h6>
                             <p><a class="gray text-decoration-none">Flash Card</a></p>
-                            <p><a class="gray text-decoration-none">MDWordPress</a></p>
-                            <p><a class="gray text-decoration-none">BrandFlow</a></p>
-                            <p><a class="gray text-decoration-none">Bootstrap Angular</a></p>
+                            <p><a class="gray text-decoration-none">Làm kiểm tra</a></p>
+                            <p><a class="gray text-decoration-none">Bài tập</a></p>
+                            <p><a class="gray text-decoration-none">Ghi chú</a></p>
                         </div>
 
                         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
@@ -99,8 +99,7 @@ export default {};
 
 <style scoped>
 footer {
-    background-color: #203856;
-    font-family: 'Montserrat', sans-serif;
+    background-color: var(--color-blue-darkest);
 }
 
 footer .logo {
@@ -109,28 +108,27 @@ footer .logo {
 }
 
 footer .text-title {
-    font-size: 1.6em;
+    font-size: 1rem;
     font-weight:bold;
-    font-family: sans-serif;
 }
 
 footer .gray {
-    color: #ccc;
-    font-size: 1em;
+    color: var(--color-gray);
+    font-size: 0.9rem;
 }
 
 
 footer .gray:hover {
-    color: #0675E8;
+    color: var(--color-blue);
     font-size: 1em;
     cursor: pointer;
 }
 
 footer a.btn:hover svg {
-    fill: #203856;
+    fill: var(--color-blue);
 }
 
 footer svg {
-    fill: #fff;
+    fill: var(--color-white);
 }
 </style>
