@@ -48,17 +48,30 @@
                                 </i>
                                 <span class="badge rounded-pill badge-notification bg-danger">1</span>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-lg-end slide-bottom">
-                                <li><a class="dropdown-item" href="#">
-                                    <div class="header">
-                                        <p class="title">Thông báo</p>
-                                        <p class="check">Đánh dấu đã đọc</p>
-                                    </div>
-                                </a></li>
+                            <ul class="dropdown-menu dropdown-menu-lg-end slide-bottom ">
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        <div class="header">
+                                            <p class="title">Thông báo</p>
+                                            <p class="check">Đánh dấu đã đọc</p>
+                                        </div>
+                                    </a>
+                                </li>
                                 <li><hr class="dropdown-divider m-2"></li>
 
+                                <li class="overflow-y-auto " style="max-height: 60vh">
+                                    <!-- <a class="dropdown-item" href="#"> Thong bao thu nhat </a> -->
+                                    <NotificationItem 
+                                        v-for="notification in notifications" 
+                                        :key="notification.id" 
+                                        :notificationProps="notification"
+                                    />
+                                </li>
                                 <li>
-                                    <a class="dropdown-item" href="#"> Thong bao thu nhat </a>
+                                    <div class="text-center">
+                                        <li><hr class="dropdown-divider m-2"></li>
+                                        <p class="check">Đánh dấu đã đọc</p>
+                                    </div>
                                 </li>
                             </ul>
                         </li>
@@ -136,11 +149,28 @@
 <script>
 import { ref, onMounted, onUnmounted } from 'vue'
 import IconArrow from './icon/IconArrow.vue'
+import NotificationItem from './notification/NotificationItem.vue'
+import axios from 'axios'
 
 export default {
     name: 'SiteNavbar',
-    components: { IconArrow },
+    components: { 
+        IconArrow,
+        NotificationItem
+    },
     setup() {
+        // get all data from API
+        const notifications = ref([])
+        const getAllNotifications = async () => {
+            try {
+                const res = axios.get('http://localhost:3000/notifications')
+                notifications.value = (await res).data
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getAllNotifications()
+
         let isNavCollapse = ref(false)
 
         const handleShowHide = () => {
@@ -163,7 +193,9 @@ export default {
         return {
             isNavCollapse,
             handleShowHide,
-            handleResize
+            handleResize,
+            notifications,
+
         }
     },
 }
@@ -214,7 +246,6 @@ li {
 
 .navbar .notification ul {
     width: 26rem;
-    max-height: 70vh;
 }
 
 .navbar .notification .header {
