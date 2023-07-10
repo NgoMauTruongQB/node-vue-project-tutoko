@@ -5,56 +5,64 @@
             "user": "03nmt",
             "name": "Ngô Mậu Trường",
             "message": "Đã thêm một bài viết lên trang cá nhân của anh ấy",
-            "created_at": "19h25 Mar 20/2023"
+            "created_at": "19h25 Mar 20/2023",
+            "isRead": false
         },
         {
             "id": 2,
             "user": "05lhn",
             "name": "Lê Hoàng Nam",
             "message": "Đã chia sẻ một ảnh mới trên trang cá nhân của anh ấy",
-            "created_at": "21h10 Mar 20/2023"
+            "created_at": "21h10 Mar 20/2023",
+            "isRead": false
         },
         {
             "id": 3,
             "user": "01ptq",
             "name": "Phạm Thị Quỳnh",
             "message": "Đã bình luận về một bài viết trên trang cá nhân của bạn",
-            "created_at": "08h45 Mar 21/2023"
+            "created_at": "08h45 Mar 21/2023",
+            "isRead": true
         },
         {
             "id": 4,
             "user": "02kls",
             "name": "Khánh Linh Singer",
             "message": "Đã thích bài viết mới trên trang cá nhân của anh ấy",
-            "created_at": "14h20 Mar 21/2023"
+            "created_at": "14h20 Mar 21/2023",
+            "isRead": true
         },
         {
             "id": 5,
             "user": "04tnv",
             "name": "Trần Ngọc Vy",
             "message": "Đã gửi một tin nhắn riêng tới bạn",
-            "created_at": "09h05 Mar 22/2023"
+            "created_at": "09h05 Mar 22/2023",
+            "isRead": true
         },
         {
             "id": 6,
             "user": "07pnq",
             "name": "Phan Nhật Quang",
             "message": "Đã đăng một video mới trên trang cá nhân của anh ấy",
-            "created_at": "18h50 Mar 23/2023"
+            "created_at": "18h50 Mar 23/2023",
+            "isRead": true
         },
         {
             "id": 7,
             "user": "06thd",
             "name": "Trương Hoàng Duy",
             "message": "Đã chia sẻ một bài viết trên trang cá nhân của anh ấy",
-            "created_at": "10h15 Mar 24/2023"
+            "created_at": "10h15 Mar 24/2023",
+            "isRead": true
         },
         {
             "id": 8,
             "user": "09lna",
             "name": "Lê Ngọc Ánh",
             "message": "Đã bình luận về một bài viết trên trang cá nhân của bạn",
-            "created_at": "16h30 Mar 25/2023"
+            "created_at": "16h30 Mar 25/2023",
+            "isRead": true
         }
                 
                 

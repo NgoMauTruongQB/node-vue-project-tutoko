@@ -46,7 +46,10 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" class="bell" viewBox="0 0 448 512">
                                     <path d="M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416H416c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/></svg>
                                 </i>
-                                <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                                <span class="badge rounded-pill badge-notification bg-danger">
+                                    
+                                    {{ unreadCount }}
+                                </span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-lg-end slide-bottom ">
                                 <li>
@@ -59,18 +62,18 @@
                                 </li>
                                 <li><hr class="dropdown-divider m-2"></li>
 
-                                <li class="overflow-y-auto " style="max-height: 60vh">
-                                    <!-- <a class="dropdown-item" href="#"> Thong bao thu nhat </a> -->
-                                    <NotificationItem 
-                                        v-for="notification in notifications" 
-                                        :key="notification.id" 
-                                        :notificationProps="notification"
+                                <div class="overflow-y-auto" style="max-height: 60vh;">
+                                    <Notifications
+                                        @unread-notification-count="unreadNotificationCount"
                                     />
-                                </li>
+                                </div>
                                 <li>
                                     <div class="text-center">
                                         <li><hr class="dropdown-divider m-2"></li>
-                                        <p class="check">Đánh dấu đã đọc</p>
+                                        
+                                         <router-link to="/notification" class="dropdown-item item-selection py-2"> 
+                                            Xem tất cả thông báo 
+                                        </router-link>
                                     </div>
                                 </li>
                             </ul>
@@ -149,30 +152,17 @@
 <script>
 import { ref, onMounted, onUnmounted } from 'vue'
 import IconArrow from './icon/IconArrow.vue'
-import NotificationItem from './notification/NotificationItem.vue'
-import axios from 'axios'
+import Notifications from './notification/Notifications.vue'
 
 export default {
     name: 'SiteNavbar',
     components: { 
         IconArrow,
-        NotificationItem
+        Notifications
     },
     setup() {
-        // get all data from API
-        const notifications = ref([])
-        const getAllNotifications = async () => {
-            try {
-                const res = axios.get('http://localhost:3000/notifications')
-                notifications.value = (await res).data
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        getAllNotifications()
-
+        // Handle reponsive navbar
         let isNavCollapse = ref(false)
-
         const handleShowHide = () => {
             isNavCollapse.value = !isNavCollapse.value
         }
@@ -190,12 +180,18 @@ export default {
         window.removeEventListener('resize', handleResize)
         })
 
+        // Handle Unread Notification Count
+        const unreadCount = ref(0)
+        const unreadNotificationCount = (CountNumber) => {
+            unreadCount.value = CountNumber
+        }
+
         return {
             isNavCollapse,
             handleShowHide,
             handleResize,
-            notifications,
-
+            unreadCount,
+            unreadNotificationCount
         }
     },
 }
@@ -245,7 +241,7 @@ li {
 }
 
 .navbar .notification ul {
-    width: 26rem;
+    width: 30rem;
 }
 
 .navbar .notification .header {
