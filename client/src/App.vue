@@ -10,8 +10,8 @@
 
 <script>
 import { RouterLink, RouterView } from 'vue-router'
-import SiteNavBar from './components/SiteNavbar.vue'
-import SiteFooter from './components/SiteFooter.vue'
+import SiteNavBar from './components/partials/SiteNavbar.vue'
+import SiteFooter from './components/partials/SiteFooter.vue'
 
 export default {
     name: 'App',

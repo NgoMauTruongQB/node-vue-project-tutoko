@@ -8,7 +8,7 @@
         :autoplay="{ delay: 5000 }"
     >
         <SwiperSlide class="slide" v-for="index in 5" :key="index">
-            <img :src="`public/img/slide/slider${index}.png`" />
+            <img :src="`img/slide/slider${index}.png`" />
         </SwiperSlide>
     </Swiper>
 </template>

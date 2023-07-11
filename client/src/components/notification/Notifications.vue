@@ -1,9 +1,22 @@
 <template>
     <div class="container">
-        <NotificationItem 
-            v-for="notification in notifications" 
-            :key="notification.id" 
+        <div class="header p-4 pb-0">
+            <p class="title">Thông báo</p>
+            <p class="check" @click="readAllNotifications">Đánh dấu đã đọc tất cả</p>
+        </div>
+        <div class="px-4">
+            <button :class="['btn mb-2', { 'active': filter === 'all' }]" @click="filterNotifications('all')">
+                Tất cả
+            </button>
+            <button :class="['btn mb-2', { 'active': filter === 'unread' }]" @click="filterNotifications('unread')">
+                Chưa đọc
+            </button>
+        </div>
+        <NotificationItem
+            v-for="notification in notifications"
+            :key="notification.id"
             :notificationProps="notification"
+            @item-read="notificationRead"
         />
     </div>
 </template>
@@ -46,14 +59,103 @@ export default {
         }
         handleUnReadNotificationCount()
 
+        // Handle notification read
+        const notificationRead = async (notification) => {
+            try {
+                const res = await axios.patch(`http://localhost:3000/notifications/${notification.id}`, { isRead: true })
+                if (res.status >= 200 && res.status < 300) {
+                    notifications.value = notifications.value.map(existingNotification => {
+                        if (existingNotification.id === notification.id) {
+                            return { ...existingNotification, isRead: true }
+                        }
+                        return existingNotification
+                    })
+                } else {
+                    console.log(`Error: Notification read failed.`)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        // Handle read all notification
+        const readAllNotifications = async () => {
+            try {
+                const res = await axios.patch('http://localhost:3000/notifications', { isRead: true })
+                if (res.status >= 200 && res.status < 300) {
+                    notifications.value = notifications.value.map(existingNotification => {
+                        if (existingNotification.id) {
+                            return { ...existingNotification, isRead: true }
+                        }
+                        return existingNotification
+                    })
+                } else {
+                    console.log(`Error: All Notification read failed.`)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        const filter = ref('all')
+        const filterNotifications = (filterType) => {
+            filter.value = filterType
+            try {
+                if (filter.value === 'unread') {
+                    notifications.value = notifications.value.filter(item => item.isRead === false)
+                } else {
+                    getAllNotifications()
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
         return {
             notifications,
             unreadNotificationCount,
+            notificationRead,
+            readAllNotifications,
+            filterNotifications,
+            filter
         }
     }
 }
 </script>
 
-<style>
-    
+<style scoped>
+
+p {
+    margin-bottom: 0.6rem;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header .title {
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+.header .check {
+    color: var(--color-blue);
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: var(--color-gray-light);
+}
+
+.btn {
+    border-radius: 10rem;
+    font-weight: 600;
+}
+
+.active {
+    border:none;
+    background-color: var(--color-blue-light);
+    color: var(--color-blue-dark);
+}
+
 </style>

@@ -4,7 +4,7 @@
 
             <!-- logo & brand name -->
             <a class="navbar-brand d-flex" href="#">
-                <img src="public/img/logo/logo.png" alt="Logo" width="64" class="d-inline-block align-text-top">
+                <img src="img/logo/logo.png" alt="Logo" width="64" class="d-inline-block align-text-top">
                 <h3 class="brand p-0 mb-0">Tutoko</h3>
             </a>
 
@@ -26,42 +26,35 @@
                         <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
                     </a>
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item nav-right ">
-                            <router-link to="/" class="nav-link nav-title"> Trang chủ </router-link>
+                        <li class="nav-item nav-right" @click="handleHide">
+                            <router-link to="/" class="nav-link nav-title" :class="{ active: isActive('/') }"> 
+                                Trang chủ 
+                            </router-link>
                         </li>
                         <hr class="dropdown-divider mx-2">
 
-                        <li class="nav-item nav-right">
-                            <router-link to="/" class="nav-link nav-title"> Blog </router-link>
+                        <li class="nav-item nav-right" @click="handleHide">
+                            <router-link to="/" class="nav-link nav-title" :class="{ active: isActive('/blog') }"> Blog </router-link>
                         </li>
                         <hr class="dropdown-divider mx-2">
 
                         <!-- Notification -->
-                        <li class="nav-item nav-right dropdown notification">
-                            <a v-if="isNavCollapse" class="nav-link  ">
-                                <router-link to="/about" class="nav-link nav-title"> Thông báo </router-link>
+                        <li class="nav-item nav-right dropdown notification" @click="handleHide">
+                            <a v-if="isNavCollapse" class="nav-link">
+                                <router-link to="/notification" class="nav-link " :class="{ active: isActive('/notification') }"> 
+                                    Thông báo 
+                                </router-link>
                             </a>
                             <a v-else class="nav-link nav-title" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="icon-notification ">
+                                <i class="icon-notification" :class="{ active: isActive('/notification') }">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" class="bell" viewBox="0 0 448 512">
                                     <path d="M224 0c-17.7 0-32 14.3-32 32V51.2C119 66 64 130.6 64 208v18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416H416c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8V208c0-77.4-55-142-128-156.8V32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/></svg>
                                 </i>
                                 <span class="badge rounded-pill badge-notification bg-danger">
-                                    
                                     {{ unreadCount }}
                                 </span>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-lg-end slide-bottom ">
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                                        <div class="header">
-                                            <p class="title">Thông báo</p>
-                                            <p class="check">Đánh dấu đã đọc</p>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li><hr class="dropdown-divider m-2"></li>
-
+                            <ul @click.stop class="dropdown-menu dropdown-menu-lg-end slide-bottom ">
                                 <div class="overflow-y-auto" style="max-height: 60vh;">
                                     <Notifications
                                         @unread-notification-count="unreadNotificationCount"
@@ -84,7 +77,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown">
                                 <img 
-                                    src="public/img/avatar/avatar_default.png" 
+                                    src="img/avatar/avatar_default.png" 
                                     height="50" 
                                     alt="Tutoko Logo"
                                     :class="['col p-0 logo', isNavCollapse ? 'hide' : '']" 
@@ -100,42 +93,42 @@
                                 </a></li>
                                 <li><hr class="dropdown-divider m-2"></li>
 
-                                <li>
-                                    <router-link to="/about" class="dropdown-item item-selection py-2"> 
+                                <li @click="handleHide">
+                                    <router-link to="/" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
                                         <IconArrow />
                                         Trang cá nhân 
                                     </router-link>
                                 </li>
                                 <li><hr class="dropdown-divider m-2"></li>
 
-                                <li>
-                                    <router-link to="/" class="dropdown-item item-selection py-2"> 
+                                <li @click="handleHide">
+                                    <router-link to="/" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
                                         <IconArrow />
                                         Thẻ ghi nhớ
                                     </router-link>
                                 </li>
-                                <li>
-                                    <router-link to="/" class="dropdown-item item-selection py-2"> 
+                                <li @click="handleHide">
+                                    <router-link to="/" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
                                         <IconArrow />
                                         Ghi chú của tôi
                                     </router-link>
                                 </li>
-                                <li>
-                                    <router-link to="/" class="dropdown-item item-selection py-2"> 
+                                <li @click="handleHide">
+                                    <router-link to="/" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
                                         <IconArrow />
                                         Bài viết đã lưu
                                     </router-link>
                                 </li> 
                                 <li><hr class="dropdown-divider m-2"></li>
 
-                                <li>
-                                    <router-link to="/" class="dropdown-item item-selection py-2"> 
+                                <li @click="handleHide">
+                                    <router-link to="/" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
                                         <IconArrow />
                                         Cài đặt
                                     </router-link>
                                 </li>
-                                <li>
-                                    <router-link to="/" class="dropdown-item item-selection py-2"> 
+                                <li @click="handleHide">
+                                    <router-link to="/" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
                                         <IconArrow />
                                         Đăng xuất
                                     </router-link>
@@ -151,8 +144,9 @@
 
 <script>
 import { ref, onMounted, onUnmounted } from 'vue'
-import IconArrow from './icon/IconArrow.vue'
-import Notifications from './notification/Notifications.vue'
+import IconArrow from '../icon/IconArrow.vue'
+import Notifications from '../notification/Notifications.vue'
+import { useRoute } from 'vue-router'
 
 export default {
     name: 'SiteNavbar',
@@ -161,10 +155,19 @@ export default {
         Notifications
     },
     setup() {
+        const route = useRoute()
+        const isActive = (routePath) => {
+            return route.path === routePath
+        }
+
         // Handle reponsive navbar
         let isNavCollapse = ref(false)
         const handleShowHide = () => {
             isNavCollapse.value = !isNavCollapse.value
+        }
+
+        const handleHide = () => {
+            isNavCollapse.value = false
         }
 
         const handleResize = () => {
@@ -191,7 +194,9 @@ export default {
             handleShowHide,
             handleResize,
             unreadCount,
-            unreadNotificationCount
+            unreadNotificationCount,
+            isActive,
+            handleHide
         }
     },
 }
@@ -240,34 +245,15 @@ li {
     color: var(--color-blue-dark);
 }
 
+.active .dropdown-item {
+    font-weight: 600;
+}
+
 .navbar .notification ul {
     width: 30rem;
 }
 
-.navbar .notification .header {
-    display: flex;
-    justify-content: space-between;
-}
-
-.notification .header p {
-    margin: 0;
-    color: var(--color-blue-dark);
-}
-
-.notification .header .title {
-    font-weight: 600;
-}
-
-.notification .header .check {
-    padding: 0 1rem;
-}
-
-.notification .header .check:hover {
-    background-color: var(--color-white);
-    border-radius: 1rem;
-}
-
-.navbar .bell:hover  {
+.navbar .active .bell  {
     fill: var(--color-blue-dark);
 }
 

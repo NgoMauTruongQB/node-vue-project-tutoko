@@ -42,7 +42,7 @@
     --color-blue-dark: #1A5DB6;
     --color-blue-darkest: #203856;
     --color-gray-dark: #666;
-    --color-gray-light: #D1D3D4;
+    --color-gray-light: rgba(0, 0, 0, 0.04);
     --color-blue-light: #e4f0fc;
     --color-white: #fff;
     --color-black: #000000A6;

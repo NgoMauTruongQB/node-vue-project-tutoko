@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
                             <div class="d-flex align-items-center mb-3">
-                                <img class="logo mx-auto" src="/public/img/logo/logo&brand.png" alt="Tutoko Logo">
+                                <img class="logo mx-auto" src="img/logo/logo&brand.png" alt="Tutoko Logo">
                             </div>
                             <p class="text-center">
                                 Choose us - Choose success
