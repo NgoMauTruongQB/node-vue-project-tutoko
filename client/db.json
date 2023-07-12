@@ -64,5 +64,79 @@
       "created_at": "16h30 Mar 25/2023",
       "isRead": true
     }
+  ],
+  "list-cards": [
+    {
+      "id": 1,
+      "user": "mautruong",
+      "type": "Từ vựng",
+      "scope": "public",
+      "nameCard": "言葉 - 趣味",
+      "author": "Ngô Mậu Trường",
+      "allNumber": 120,
+      "readNumber": 30,
+      "percent": 25,
+      "countDay": 2
+    },
+    {
+      "id": 3,
+      "user": "ngocdung",
+      "type": "Ngữ pháp",
+      "scope": "private",
+      "nameCard": "文法 2",
+      "author": "Nguyễn Thị Ngọc Dung",
+      "allNumber": 100,
+      "readNumber": 75,
+      "percent": 75,
+      "countDay": 5
+    },
+    {
+      "id": 4,
+      "user": "linhtran",
+      "type": "Từ điển",
+      "scope": "public",
+      "nameCard": "辞書 - 日本語",
+      "author": "Trần Thị Linh",
+      "allNumber": 200,
+      "readNumber": 100,
+      "percent": 50,
+      "countDay": 2
+    },
+    {
+      "id": 2,
+      "user": "thanhhien",
+      "type": "Kanji",
+      "scope": "private",
+      "nameCard": "漢字",
+      "author": "Nguyễn Thị Thanh Hiền",
+      "allNumber": 30,
+      "readNumber": 30,
+      "percent": 100,
+      "countDay": 9
+    },
+    {
+      "id": 5,
+      "user": "hungvuong",
+      "type": "Luyện nghe",
+      "scope": "save",
+      "nameCard": "聴解問題",
+      "author": "Vương Văn Hùng",
+      "allNumber": 50,
+      "readNumber": 20,
+      "percent": 40,
+      "countDay": 25
+    },
+    {
+      "id": 6,
+      "user": "ngoclinh",
+      "type": "Kanji",
+      "scope": "save",
+      "nameCard": "漢字 N2",
+      "author": "Lê Ngọc Linh",
+      "allNumber": 80,
+      "readNumber": 60,
+      "percent": 75,
+      "countDay": 2
+    }
   ]
 }

@@ -54,8 +54,8 @@
                                     {{ unreadCount }}
                                 </span>
                             </a>
-                            <ul @click.stop class="dropdown-menu dropdown-menu-lg-end slide-bottom ">
-                                <div class="overflow-y-auto" style="max-height: 60vh;">
+                            <ul class="dropdown-menu dropdown-menu-lg-end slide-bottom" :class="{ hide: isActive('/notification')}">
+                                <div @click.stop class="overflow-y-auto" style="max-height: 60vh;">
                                     <Notifications
                                         @unread-notification-count="unreadNotificationCount"
                                     />
@@ -63,8 +63,7 @@
                                 <li>
                                     <div class="text-center">
                                         <li><hr class="dropdown-divider m-2"></li>
-                                        
-                                         <router-link to="/notification" class="dropdown-item item-selection py-2"> 
+                                        <router-link to="/notification" class="dropdown-item item-selection py-2"> 
                                             Xem tất cả thông báo 
                                         </router-link>
                                     </div>
@@ -94,7 +93,7 @@
                                 <li><hr class="dropdown-divider m-2"></li>
 
                                 <li @click="handleHide">
-                                    <router-link to="/" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
+                                    <router-link to="/personal" class="dropdown-item item-selection py-2" :class="{ active: isActive('/personal') }"> 
                                         <IconArrow />
                                         Trang cá nhân 
                                     </router-link>
@@ -102,7 +101,7 @@
                                 <li><hr class="dropdown-divider m-2"></li>
 
                                 <li @click="handleHide">
-                                    <router-link to="/" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
+                                    <router-link to="/flash-cards" class="dropdown-item item-selection py-2" :class="{ active: isActive('/flash-cards') }"> 
                                         <IconArrow />
                                         Thẻ ghi nhớ
                                     </router-link>
@@ -155,6 +154,7 @@ export default {
         Notifications
     },
     setup() {
+        // Handle active navbar
         const route = useRoute()
         const isActive = (routePath) => {
             return route.path === routePath
