@@ -1,14 +1,16 @@
 <template>
     <div>
-        <SiteNavBar/>
+        <SiteNavBar v-if="!isHide"/>
         <main style="margin-top: 100px">
             <RouterView />
         </main>
-        <SiteFooter/>
+        <SiteFooter v-if="!isHide"/>
     </div>
 </template>
 
 <script>
+import { useRoute } from 'vue-router'
+import { watch, ref } from 'vue'
 import SiteNavBar from './components/partials/SiteNavbar.vue'
 import SiteFooter from './components/partials/SiteFooter.vue'
 
@@ -17,6 +19,20 @@ export default {
     components: {
         SiteNavBar,
         SiteFooter
+    },
+    setup() {
+        const isHide = ref(false)
+        const route = useRoute()
+        watch(
+            () => route.path,
+            (newPath) => {
+                isHide.value = newPath === '/login' || newPath === '/register' || newPath === '/:catchAll(.*)'
+            }
+        )
+
+        return {
+            isHide
+        }
     }
 }
 </script>

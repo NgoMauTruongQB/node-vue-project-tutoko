@@ -5,7 +5,7 @@
 <script>
 export default {
     name: 'FlashCard',
-    props: ['setCardProps'],
+    props: ['flashCardProps'],
 }
 </script>
 

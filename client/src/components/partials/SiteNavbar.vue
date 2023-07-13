@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg ">
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid" >
 
             <!-- logo & brand name -->
@@ -76,7 +76,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown">
                                 <img 
-                                    src="../../../public/img/avatar/avatar_default.png" 
+                                    src="../../../public/img/user/avatar_default.png" 
                                     height="50" 
                                     alt="Tutoko Logo"
                                     :class="['col p-0 logo', isNavCollapse ? 'hide' : '']" 
@@ -176,11 +176,11 @@ export default {
         }
 
         onMounted(() => {
-        window.addEventListener('resize', handleResize)
+            window.addEventListener('resize', handleResize)
         })
 
         onUnmounted(() => {
-        window.removeEventListener('resize', handleResize)
+            window.removeEventListener('resize', handleResize)
         })
 
         // Handle Unread Notification Count

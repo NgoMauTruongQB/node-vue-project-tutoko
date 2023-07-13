@@ -5,12 +5,14 @@ import NotificationView from '../views/user/notifications/NotificationView.vue'
 import SetCardsView from '../views/user/flashCards/SetCardsView.vue'
 import ErrorView from '../views/ErrorView.vue'
 import FlashCardsView from '../views/user/flashCards/FlashCardsView.vue'
+import LoginPage from '../views/LoginView.vue'
 
 const routes =  [
+    { path: '/login', name: 'login', component: LoginPage },
     { path: '/personal', component: PersonalPageView },
     { path: '/notification', component: NotificationView },
-    { path: '/set-cards', component:  SetCardsView},
-    { path: '/flash-cards/:cardsId', name: 'FlashCards', component: FlashCardsView},
+    { path: '/set-cards', component:  SetCardsView },
+    { path: '/flash-cards/:cardsId', name: 'FlashCards', component: FlashCardsView },
     { path: '/', component: HomeView },
     { path: '/:catchAll(.*)', component: ErrorView }
 ]
