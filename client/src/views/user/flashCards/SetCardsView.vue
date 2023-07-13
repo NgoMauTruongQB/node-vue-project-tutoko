@@ -8,48 +8,55 @@
             </i>
         </div>
         <div class="row">
-            <DemoFlashCards
+            <SetCard
                 class="mb-2 col-12 col-md-6 col-lg-4"
-                v-for="flashCards in listFlashCards"
-                :key="flashCards.id"
-                :flashCardsProps="flashCards" 
+                v-for="setCard in listSetCard"
+                :key="setCard.id"
+                :setCardProps="setCard"
+                @cards-id="handleCallPath"
             />
         </div>
     </div>
 </template>
 
 <script>
-import DemoFlashCards from '../../../components/flashCard/demoFlashCard.vue'
+
 import { ref } from 'vue'
 import axios from 'axios'
+import SetCard  from '../../../components/card/SetCard.vue'
+import router from '../../../router'
 
 export default {
-    name: 'ListFlashCardsView',
-    components: { 
-        DemoFlashCards
-    },
+    name: 'SetCardsView',
+    components: { SetCard },
     setup() {
-        // Get all listFlashCards from API
-        const listFlashCards = ref([])
+        // Get all listSetCard from API
+        const listSetCard = ref([])
 
-        const getAllListFlashCards = async () => {
+        const getListSetCard = async () => {
             try {
-                const res = axios.get('http://localhost:3000/list-cards')
-                listFlashCards.value = (await res).data
+                const res = axios.get('http://localhost:3000/list-set-cards')
+                listSetCard.value = (await res).data
             } catch (error) {
                 console.log(error)
             }
         }
-        getAllListFlashCards()
+        getListSetCard()
+
+        // Hanle call path by id
+        const handleCallPath = (setCard) => {
+            router.push({ path: `/flash-cards/${setCard.cardsId}` })
+        }
 
         return {
-            listFlashCards
+            listSetCard,
+            handleCallPath
         }
     }
 }
 </script>
 
-<style scoped>
+<style>
 
 .header {
     color: var(--color-blue-dark);
@@ -72,6 +79,5 @@ export default {
 hr {
     border-top: 1px solid #ccc;
 }
-</style>
 
-   
+</style>

@@ -6,7 +6,7 @@
         <div class="card mb-2 py-2">
             <div class="media d-inline-flex row">
                 <div class="col-md-2 col-2 text-center">
-                    <img src="public/img/logo/logo.png">
+                    <img src="../../../public/img/logo/logo.png">
                 </div>
                 <div class="media-body col-md-9 col-8">
                     <h6 class="mt-2 mb-1">{{ notificationProps.name }}</h6>

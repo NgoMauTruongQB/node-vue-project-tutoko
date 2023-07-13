@@ -65,7 +65,7 @@
       "isRead": true
     }
   ],
-  "list-cards": [
+  "list-set-cards": [
     {
       "id": 1,
       "user": "mautruong",
@@ -76,7 +76,8 @@
       "allNumber": 120,
       "readNumber": 30,
       "percent": 25,
-      "countDay": 2
+      "countDay": 2,
+      "cardsId": 101
     },
     {
       "id": 3,
@@ -88,7 +89,8 @@
       "allNumber": 100,
       "readNumber": 75,
       "percent": 75,
-      "countDay": 5
+      "countDay": 5,
+      "cardsId": 102
     },
     {
       "id": 4,
@@ -100,7 +102,8 @@
       "allNumber": 200,
       "readNumber": 100,
       "percent": 50,
-      "countDay": 2
+      "countDay": 2,
+      "cardsId": 103
     },
     {
       "id": 2,
@@ -112,7 +115,8 @@
       "allNumber": 30,
       "readNumber": 30,
       "percent": 100,
-      "countDay": 9
+      "countDay": 9,
+      "cardsId": 104
     },
     {
       "id": 5,
@@ -124,7 +128,8 @@
       "allNumber": 50,
       "readNumber": 20,
       "percent": 40,
-      "countDay": 25
+      "countDay": 25,
+      "cardsId": 105
     },
     {
       "id": 6,
@@ -136,7 +141,411 @@
       "allNumber": 80,
       "readNumber": 60,
       "percent": 75,
-      "countDay": 2
+      "countDay": 2,
+      "cardsId": 106
+    }
+  ],
+  "list-cards": [
+    {
+      "id": 101,
+      "cards": [
+        {
+          "id": 1,
+          "faceSide": "犬",
+          "reverseSide": "Con chó",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 2,
+          "faceSide": "猫",
+          "reverseSide": "Con mèo",
+          "isRead": true,
+          "isRemembered": false
+        },
+        {
+          "id": 3,
+          "faceSide": "料理",
+          "reverseSide": "Nấu ăn",
+          "isRead": true,
+          "isRemembered": true
+        },
+        {
+          "id": 4,
+          "faceSide": "魚",
+          "reverseSide": "Cá",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 5,
+          "faceSide": "鳥",
+          "reverseSide": "Chim",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 6,
+          "faceSide": "花",
+          "reverseSide": "Hoa",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 7,
+          "faceSide": "学校",
+          "reverseSide": "Trường học",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 8,
+          "faceSide": "本",
+          "reverseSide": "Sách",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 9,
+          "faceSide": "電車",
+          "reverseSide": "Xe điện",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 10,
+          "faceSide": "電話",
+          "reverseSide": "Điện thoại",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 27,
+          "faceSide": "簡単",
+          "reverseSide": "Dễ dàng",
+          "isRead": false,
+          "isRemembered": false
+        }
+      ]
+    },
+    {
+      "id": 102,
+      "cards": [
+        {
+          "id": 11,
+          "faceSide": "友達",
+          "reverseSide": "Bạn bè",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 12,
+          "faceSide": "家",
+          "reverseSide": "Nhà",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 13,
+          "faceSide": "旅行",
+          "reverseSide": "Du lịch",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 14,
+          "faceSide": "音楽",
+          "reverseSide": "Âm nhạc",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 15,
+          "faceSide": "映画",
+          "reverseSide": "Phim",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 16,
+          "faceSide": "食べ物",
+          "reverseSide": "Đồ ăn",
+          "isRead": false,
+          "isRemembered": false
+        }
+      ]
+    },
+    {
+      "id": 103,
+      "cards": [
+        {
+          "id": 28,
+          "faceSide": "幸せ",
+          "reverseSide": "Hạnh phúc",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 29,
+          "faceSide": "悲しい",
+          "reverseSide": "Buồn",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 30,
+          "faceSide": "大丈夫",
+          "reverseSide": "Ổn",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 31,
+          "faceSide": "上手",
+          "reverseSide": "Giỏi",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 32,
+          "faceSide": "下手",
+          "reverseSide": "Kém",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 33,
+          "faceSide": "忙しい",
+          "reverseSide": "Bận",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 34,
+          "faceSide": "暇",
+          "reverseSide": "Rảnh rỗi",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 35,
+          "faceSide": "強い",
+          "reverseSide": "Mạnh mẽ",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 36,
+          "faceSide": "弱い",
+          "reverseSide": "Yếu",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 37,
+          "faceSide": "寒い",
+          "reverseSide": "Lạnh",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 38,
+          "faceSide": "暑い",
+          "reverseSide": "Nóng",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 39,
+          "faceSide": "遠い",
+          "reverseSide": "Xa",
+          "isRead": false,
+          "isRemembered": false
+        }
+      ]
+    },
+    {
+      "id": 104,
+      "cards": [
+        {
+          "id": 40,
+          "faceSide": "近い",
+          "reverseSide": "Gần",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 41,
+          "faceSide": "明るい",
+          "reverseSide": "Sáng",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 42,
+          "faceSide": "暗い",
+          "reverseSide": "Tối",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 43,
+          "faceSide": "静か",
+          "reverseSide": "Yên tĩnh",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 44,
+          "faceSide": "賑やか",
+          "reverseSide": "Sôi động",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 45,
+          "faceSide": "美しい",
+          "reverseSide": "Đẹp",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 46,
+          "faceSide": "醜い",
+          "reverseSide": "Xấu",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 47,
+          "faceSide": "速い",
+          "reverseSide": "Nhanh",
+          "isRead": false,
+          "isRemembered": false
+        }
+      ]
+    },
+    {
+      "id": 105,
+      "cards": [
+        {
+          "id": 48,
+          "faceSide": "遅い",
+          "reverseSide": "Chậm",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 49,
+          "faceSide": "元気",
+          "reverseSide": "Khỏe mạnh",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 50,
+          "faceSide": "病気",
+          "reverseSide": "Bệnh",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 51,
+          "faceSide": "笑顔",
+          "reverseSide": "Nụ cười",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 52,
+          "faceSide": "涙",
+          "reverseSide": "Nước mắt",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 53,
+          "faceSide": "希望",
+          "reverseSide": "Hy vọng",
+          "isRead": false,
+          "isRemembered": false
+        }
+      ]
+    },
+    {
+      "id": 106,
+      "cards": [
+        {
+          "id": 17,
+          "faceSide": "飲み物",
+          "reverseSide": "Đồ uống",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 18,
+          "faceSide": "赤",
+          "reverseSide": "Màu đỏ",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 19,
+          "faceSide": "青",
+          "reverseSide": "Màu xanh",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 20,
+          "faceSide": "黄色",
+          "reverseSide": "Màu vàng",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 21,
+          "faceSide": "大きい",
+          "reverseSide": "To",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 22,
+          "faceSide": "小さい",
+          "reverseSide": "Nhỏ",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 23,
+          "faceSide": "新しい",
+          "reverseSide": "Mới",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 24,
+          "faceSide": "古い",
+          "reverseSide": "Cũ",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 25,
+          "faceSide": "面白い",
+          "reverseSide": "Thú vị",
+          "isRead": false,
+          "isRemembered": false
+        },
+        {
+          "id": 26,
+          "faceSide": "難しい",
+          "reverseSide": "Khó",
+          "isRead": false,
+          "isRemembered": false
+        }
+      ]
     }
   ]
 }

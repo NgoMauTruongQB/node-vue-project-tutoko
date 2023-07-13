@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import { RouterLink, RouterView } from 'vue-router'
 import SiteNavBar from './components/partials/SiteNavbar.vue'
 import SiteFooter from './components/partials/SiteFooter.vue'
 

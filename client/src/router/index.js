@@ -1,30 +1,24 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import PersonalPageView from '../views/user/me/PersonalPageView.vue'
+import NotificationView from '../views/user/notifications/NotificationView.vue'
+import SetCardsView from '../views/user/flashCards/SetCardsView.vue'
+import ErrorView from '../views/ErrorView.vue'
+import FlashCardsView from '../views/user/flashCards/FlashCardsView.vue'
+
+const routes =  [
+    { path: '/personal', component: PersonalPageView },
+    { path: '/notification', component: NotificationView },
+    { path: '/set-cards', component:  SetCardsView},
+    { path: '/flash-cards/:cardsId', name: 'FlashCards', component: FlashCardsView},
+    { path: '/', component: HomeView },
+    { path: '/:catchAll(.*)', component: ErrorView }
+]
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
-    routes: [
-        {
-            path: '/personal',
-            name: 'personalPageView',
-            component: () => import('../views/user/me/PersonalPageView.vue')
-        },
-        {
-            path: '/notification',
-            name: 'notification',
-            component: () => import('../views/user/notifications/NotificationView.vue'),
-        },
-        {
-            path: '/flash-cards',
-            name: 'flashCards',
-            component: () => import('../views/user/flashCards/ListFlashCardsView.vue')
-        },
-        {
-            path: '/',
-            name: 'home',
-            component: HomeView,
-        },
-    ],
+    routes
 })
+
 
 export default router

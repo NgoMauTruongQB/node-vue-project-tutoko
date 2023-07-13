@@ -3,10 +3,10 @@
         <div class="container-fluid" >
 
             <!-- logo & brand name -->
-            <a class="navbar-brand d-flex" href="#">
-                <img src="img/logo/logo.png" alt="Logo" width="64" class="d-inline-block align-text-top">
+            <router-link to="/" class="navbar-brand d-flex" :class="{ active: isActive('/') }"> 
+                <img src="../../../public/img/logo/logo.png" alt="Logo" width="64" class="d-inline-block align-text-top">
                 <h3 class="brand p-0 mb-0">Tutoko</h3>
-            </a>
+            </router-link>
 
             <!-- SideNav -->
             <div :class="isNavCollapse ? 'overlay' : '' " @click="handleShowHide"></div>
@@ -76,7 +76,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown">
                                 <img 
-                                    src="img/avatar/avatar_default.png" 
+                                    src="../../../public/img/avatar/avatar_default.png" 
                                     height="50" 
                                     alt="Tutoko Logo"
                                     :class="['col p-0 logo', isNavCollapse ? 'hide' : '']" 
@@ -101,7 +101,7 @@
                                 <li><hr class="dropdown-divider m-2"></li>
 
                                 <li @click="handleHide">
-                                    <router-link to="/flash-cards" class="dropdown-item item-selection py-2" :class="{ active: isActive('/flash-cards') }"> 
+                                    <router-link to="/set-cards" class="dropdown-item item-selection py-2" :class="{ active: isActive('/flash-cards') }"> 
                                         <IconArrow />
                                         Thẻ ghi nhớ
                                     </router-link>
