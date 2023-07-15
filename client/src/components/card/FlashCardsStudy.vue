@@ -1,13 +1,16 @@
 <template>
+    <CongratulationBox />
     <div class="box my-2 overflow-hidden">
+        <div class="d-flex justify-content-center m-1">{{currentSlide}}/{{totalSlides}}</div>
         <Swiper
             :effect="'cards'"
             :grabCursor="true"
             :modules="modules"
             :cardsEffect="{ perSlideOffset: 1, perSlideRotate: 1, rotate: true, slideShadows: false }" 
-            :noSwiping="true"
-            :noClick="true"
+            :shortSwipes="false"
+            :touchMoveStopPropagation="true"
             @swiper="onSwiperInit"
+            @reachEnd="showCongratulations"
             @slideChange="onSlideChange"
         >
             <SwiperSlide class="slide" v-for="flashCard in dataFlashCard" :key="flashCard.id">
@@ -24,13 +27,14 @@
                 <IconArrow />
             </button>
         </div>
-        <div class="progress-bar">
-            <div class="progress" :style="{ width: progressWidth }"></div>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" :style="{ width: progressWidth}" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
     </div>
 </template>
 
 <script>
+import CongratulationBox from '../shared/CongratulationBox.vue'
 import FlashCard from './FlashCard.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { EffectCards} from 'swiper'
@@ -48,7 +52,8 @@ export default {
         FlashCard,
         Swiper,
         SwiperSlide,
-        IconArrow
+        IconArrow,
+        CongratulationBox
     },
     setup() {
         const dataFlashCard = ref([ 
@@ -64,13 +69,15 @@ export default {
         ])
 
         const modules = [ EffectCards ]
+        const progressWidth = ref('0%')
+        const totalSlides = ref(0)
+        const currentSlide = ref(1)
 
         let swiperInstance = null
 
-        const progressWidth = ref('0%')
-
         const onSwiperInit = (swiper) => {
             swiperInstance = swiper
+            totalSlides.value = swiperInstance.slides.length
         }
 
         const prevSlide = () => {
@@ -81,12 +88,13 @@ export default {
             swiperInstance.slideNext()
         }
 
+        const showCongratulations = () => {
+            console.log("CHUC MUNG")
+        }
+
         const onSlideChange = () => {
-            const currentSlide = swiperInstance.currentSlide
-            console.log(currentSlide)
-            const totalSlides = swiperInstance.slides.length
-            const progress = ((currentSlide + 1) / totalSlides) * 100
-            console.log(progress)
+            currentSlide.value = swiperInstance.activeIndex + 1
+            const progress = ((currentSlide.value) / totalSlides.value) * 100
             progressWidth.value = `${progress}%`
         }
 
@@ -97,7 +105,10 @@ export default {
             nextSlide,
             dataFlashCard,
             onSlideChange,
-            progressWidth
+            progressWidth,
+            showCongratulations,
+            totalSlides,
+            currentSlide
         }
     }
 
@@ -143,6 +154,15 @@ export default {
 
 .rotate-180 {
     transform: rotate(180deg);
+}
+
+.progress {
+    height: 4px;
+    border-radius: 10px;
+}
+
+.progress div {
+    background-color: var(--color-blue-dark);
 }
 
 @media screen and (max-width: 1024px) {

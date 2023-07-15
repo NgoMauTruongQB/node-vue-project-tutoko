@@ -1,11 +1,11 @@
 <template>
     <div style="background-color: var(--color-gray-bg)">
         <div class="container">
-            <h1 class="p-2">言葉</h1>
-            <div class="d-flex justify-content-center align-items-center">
+            <h1 class="">言葉</h1>
+            <!-- <div class="d-flex justify-content-center align-items-center">
                 <button class="btn-study btn bg-primary mx-2" @click="handleMode('study')">Study</button>
                 <button class="btn-practice btn bg-primary mx-2" @click="handleMode('practice')">Practice</button>
-            </div>
+            </div> -->
             <div class="main d-flex justify-content-center align-items-center">
                 <FlashCardStudy v-if="mode === 'study'"/>
                 <FlashCardsPractice v-else/>
