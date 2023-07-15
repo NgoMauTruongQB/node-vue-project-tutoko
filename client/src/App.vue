@@ -1,7 +1,7 @@
 <template>
     <div>
         <SiteNavBar v-if="!isHide"/>
-        <main style="margin-top: 100px">
+        <main style="margin-top: 91px">
             <RouterView />
         </main>
         <SiteFooter v-if="!isHide"/>

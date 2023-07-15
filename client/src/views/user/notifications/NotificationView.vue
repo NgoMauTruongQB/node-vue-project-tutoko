@@ -24,6 +24,7 @@ export default {
     min-height: 86vh;
     display: flex;
     justify-content: center;
+    margin-top: 100px;
 }
 
 .main {
