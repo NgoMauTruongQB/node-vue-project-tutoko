@@ -6,13 +6,14 @@ import SetCardsView from '../views/user/flashCards/SetCardsView.vue'
 import ErrorView from '../views/ErrorView.vue'
 import FlashCardsView from '../views/user/flashCards/FlashCardsView.vue'
 import LoginPage from '../views/LoginView.vue'
+import FlashCardHomeView from '../views/user/flashCards/FlashCardHomeView.vue'
 
 const routes =  [
     { path: '/login', name: 'login', component: LoginPage },
     { path: '/personal', component: PersonalPageView },
     { path: '/notification', component: NotificationView },
     { path: '/set-cards', component:  SetCardsView },
-    { path: '/flash-cards/:cardsId', name: 'FlashCards', component: FlashCardsView },
+    { path: '/flash-cards/:cardsId/home', name: 'FlashCards', component: FlashCardHomeView },
     { path: '/', component: HomeView },
     { path: '/:catchAll(.*)', component: ErrorView }
 ]

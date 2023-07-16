@@ -45,7 +45,7 @@ export default {
 
         // Hanle call path by id
         const handleCallPath = (setCard) => {
-            router.push({ path: `/flash-cards/${setCard.cardsId}` })
+            router.push({ path: `/flash-cards/${setCard.cardsId}/home`})
         }
 
         return {

@@ -1,45 +1,70 @@
 <template>
-    <CongratulationBox />
     <div class="box my-2 overflow-hidden">
-        <div class="d-flex justify-content-center m-1">{{currentSlide}}/{{totalSlides}}</div>
-        <Swiper
-            :effect="'cards'"
-            :grabCursor="true"
-            :modules="modules"
-            :cardsEffect="{ perSlideOffset: 1, perSlideRotate: 1, rotate: true, slideShadows: false }" 
-            :shortSwipes="false"
-            :touchMoveStopPropagation="true"
-            @swiper="onSwiperInit"
-            @reachEnd="showCongratulations"
-            @slideChange="onSlideChange"
-        >
-            <SwiperSlide class="slide" v-for="flashCard in dataFlashCard" :key="flashCard.id">
-                <FlashCard 
-                    :flashCardProps="flashCard"
-                />
-            </SwiperSlide>
-        </Swiper>
-        <div class="btn-footer d-flex justify-content-center">
-            <button class="prev my-4" @click="prevSlide">
-                <IconArrow class=" rotate-180" />
-            </button>
-            <button class="next my-4" @click="nextSlide">
-                <IconArrow />
-            </button>
+        <div v-if="isCompleted">
+            <div class="congratulation">
+                <div class="header">
+                </div>
+                <div class="body text-center py-5">
+                    <FireWork />
+                    <img src="../../assets/img/icon/applause.png" alt="">
+                    <h4 class="mt-2 py-5">Chúc mừng! Bạn đã học tất cả các thẻ.</h4>
+                </div>
+                <div class="footer">
+                    <div class="directional">
+                        <div class="back-to-card mx-3 d-flex justify-content-start"> 
+                            <IconArrow class=" rotate-180" />
+                            <p class="study my-1 mx-2">Học lại </p>
+                        </div>
+                        <div class="mx-3 d-flex justify-content-end"> 
+                            <p class="practice my-1 mx-2"> Luyện tập </p>
+                            <IconArrow/>
+                        </div>
+                    </div>
+                    <div class="progress mx-3">
+                        <div class="progress-bar" role="progressbar" :style="{ width: progressWidth}" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" :style="{ width: progressWidth}" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        <div v-else>
+            <div class="d-flex justify-content-center m-1">{{currentSlide}}/{{totalSlides}}</div>
+            <Swiper
+                :effect="'cards'"
+                :grabCursor="true"
+                :modules="modules"
+                :cardsEffect="{ perSlideOffset: 1, perSlideRotate: 1, rotate: true, slideShadows: false }" 
+                :shortSwipes="false"
+                :touchMoveStopPropagation="true"
+                @swiper="onSwiperInit"
+                @reachEnd="showCongratulations"
+                @slideChange="onSlideChange"
+            >
+                <SwiperSlide class="slide" v-for="flashCard in dataFlashCard" :key="flashCard.id">
+                    <FlashCard :flashCardProps="flashCard" />
+                </SwiperSlide>
+            </Swiper>
+            <div class="btn-footer d-flex justify-content-center">
+                <button class="prev my-4" @click="prevSlide">
+                    <IconArrow class=" rotate-180" />
+                </button>
+                <button class="next my-4" @click="nextSlide">
+                    <IconArrow />
+                </button>
+            </div>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" :style="{ width: progressWidth}" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-import CongratulationBox from '../shared/CongratulationBox.vue'
 import FlashCard from './FlashCard.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { EffectCards} from 'swiper'
 import IconArrow from '../icon/IconArrow.vue'
-import { ref, onMounted } from 'vue'
+import FireWork from '../icon/FireWork.vue'
+import { ref } from 'vue'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -53,7 +78,7 @@ export default {
         Swiper,
         SwiperSlide,
         IconArrow,
-        CongratulationBox
+        FireWork
     },
     setup() {
         const dataFlashCard = ref([ 
@@ -72,6 +97,7 @@ export default {
         const progressWidth = ref('0%')
         const totalSlides = ref(0)
         const currentSlide = ref(1)
+        const isCompleted = ref(false)
 
         let swiperInstance = null
 
@@ -89,7 +115,7 @@ export default {
         }
 
         const showCongratulations = () => {
-            console.log("CHUC MUNG")
+            isCompleted.value = true
         }
 
         const onSlideChange = () => {
@@ -108,7 +134,8 @@ export default {
             progressWidth,
             showCongratulations,
             totalSlides,
-            currentSlide
+            currentSlide,
+            isCompleted
         }
     }
 
@@ -165,6 +192,47 @@ export default {
     background-color: var(--color-blue-dark);
 }
 
+.congratulation {
+    width: 100%;
+    height: 28rem;
+    perspective: 1000px;
+    background-color: var(--color-white);
+    position: relative;
+    border-radius: 0.6rem;
+    box-shadow: 0 0.25rem 1rem 0 var(--color-gray-light);
+}
+
+.congratulation .footer {
+    position: absolute;
+    width: 100%;
+    bottom: 3rem;
+}
+
+.congratulation .directional {
+    display: flex;
+    justify-content: space-between;
+}
+
+.congratulation .directional .study,
+.congratulation .directional .practice {
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.congratulation .directional .study:hover,
+.congratulation .directional .practice:hover {
+    color: var(--color-blue-dark);
+    scale: 1.1;
+}
+
+.congratulation .body img {
+    width: 10rem;
+}
+
+.congratulation .progress {
+    height: 2px;
+}
+
 @media screen and (max-width: 1024px) {
     .box {
         width: 80%;
@@ -176,12 +244,24 @@ export default {
         width: 100%;
         padding: 1rem;
     }
+
+    .congratulation {
+        height: 20rem;
+    }
+
+    .congratulation .body img {
+        width: 6rem;
+    }
 }
 
 @media screen and (max-width: 600px) {
     .box {
         width: 100%;
         padding: 0.1rem;
+    }
+
+    .congratulation .body img {
+        width: 6rem;
     }
 }
 </style> 

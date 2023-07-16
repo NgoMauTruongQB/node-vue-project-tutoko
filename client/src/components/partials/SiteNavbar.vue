@@ -93,7 +93,6 @@
 
                                 <li @click="handleHide">
                                     <router-link to="/personal" class="dropdown-item item-selection py-2" :class="{ active: isActive('/personal') }"> 
-                                        <IconArrow />
                                         Trang cá nhân 
                                     </router-link>
                                 </li>
@@ -101,19 +100,16 @@
 
                                 <li @click="handleHide">
                                     <router-link to="/set-cards" class="dropdown-item item-selection py-2" :class="{ active: isActive('/flash-cards') }"> 
-                                        <IconArrow />
                                         Thẻ ghi nhớ
                                     </router-link>
                                 </li>
                                 <li @click="handleHide">
                                     <router-link to="/" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
-                                        <IconArrow />
                                         Ghi chú của tôi
                                     </router-link>
                                 </li>
                                 <li @click="handleHide">
                                     <router-link to="/" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
-                                        <IconArrow />
                                         Bài viết đã lưu
                                     </router-link>
                                 </li> 
@@ -121,13 +117,11 @@
 
                                 <li @click="handleHide">
                                     <router-link to="/" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
-                                        <IconArrow />
                                         Cài đặt
                                     </router-link>
                                 </li>
                                 <li @click="handleHide">
                                     <router-link to="/" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
-                                        <IconArrow />
                                         Đăng xuất
                                     </router-link>
                                 </li>
@@ -302,12 +296,8 @@ li {
     color: var(--color-gray-dark);
 }
 
-.navbar .item-selection:hover .arrow {
-    display: inline;
-}
-
-.navbar .arrow {
-    display: none;
+.navbar .item-selection:hover  {
+    font-weight: 600;
 }
 
 .dropdown-divider {
