@@ -13,7 +13,7 @@ const routes =  [
     { path: '/personal', component: PersonalPageView },
     { path: '/notification', component: NotificationView },
     { path: '/set-cards', component:  SetCardsView },
-    { path: '/flash-cards/:cardsId/home', name: 'FlashCards', component: FlashCardHomeView },
+    { path: '/flash-cards/:cardsId/home', name: 'FlashCards', component:  FlashCardHomeView},
     { path: '/', component: HomeView },
     { path: '/:catchAll(.*)', component: ErrorView }
 ]

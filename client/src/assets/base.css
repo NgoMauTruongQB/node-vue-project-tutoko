@@ -50,6 +50,7 @@
     --color-success: #2dce89;
     --color-warning: #fb6340;
     --color-danger: #dc3545;
+    --color-yellow: #ff983a;
 }
 
 @media (prefers-color-scheme: dark) {
