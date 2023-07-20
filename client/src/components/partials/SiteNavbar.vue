@@ -121,7 +121,7 @@
                                     </router-link>
                                 </li>
                                 <li @click="handleHide">
-                                    <router-link to="/" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
+                                    <router-link to="/login" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
                                         Đăng xuất
                                     </router-link>
                                 </li>

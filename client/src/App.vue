@@ -1,7 +1,7 @@
 <template>
     <div>
         <SiteNavBar v-if="!isHide"/>
-        <main style="margin-top: 91px">
+        <main>
             <RouterView />
         </main>
         <SiteFooter v-if="!isHide"/>
@@ -26,7 +26,7 @@ export default {
         watch(
             () => route.path,
             (newPath) => {
-                isHide.value = newPath === '/login' || newPath === '/register' || newPath === '/:catchAll(.*)'
+                isHide.value = newPath === '/login' || newPath === '/register' || newPath === '/forgot-password' || newPath === '/reset-password'
             }
         )
 

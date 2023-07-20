@@ -5,11 +5,17 @@ import NotificationView from '../views/user/notifications/NotificationView.vue'
 import SetCardsView from '../views/user/flashCards/SetCardsView.vue'
 import ErrorView from '../views/ErrorView.vue'
 import FlashCardsView from '../views/user/flashCards/FlashCardsView.vue'
-import LoginPage from '../views/LoginView.vue'
+import LoginView from '../views/authentication/LoginView.vue'
 import FlashCardHomeView from '../views/user/flashCards/FlashCardHomeView.vue'
+import RegisterView from '../views/authentication/RegisterView.vue'
+import ForgotPasswordView from "../views/authentication/ForgotPasswordView.vue"
+import  ResetPasswordView from '../views/authentication/ResetPasswordView.vue'
 
 const routes =  [
-    { path: '/login', name: 'login', component: LoginPage },
+    { path: '/login', name: 'login', component: LoginView },
+    { path: '/register', name: 'register', component:  RegisterView},
+    { path: '/forgot-password', name: 'forgot-password', component: ForgotPasswordView },
+    { path: '/reset-password', name: 'reset-password', component: ResetPasswordView},
     { path: '/personal', component: PersonalPageView },
     { path: '/notification', component: NotificationView },
     { path: '/set-cards', component:  SetCardsView },
