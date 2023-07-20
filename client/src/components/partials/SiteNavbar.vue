@@ -33,7 +33,7 @@
                         <hr class="dropdown-divider mx-2">
 
                         <li class="nav-item nav-right" @click="handleHide">
-                            <router-link to="/" class="nav-link nav-title" :class="{ active: isActive('/blog') }"> Blog </router-link>
+                            <router-link to="/new-post" class="nav-link nav-title" :class="{ active: isActive('/blog') }"> Blog </router-link>
                         </li>
                         <hr class="dropdown-divider mx-2">
 

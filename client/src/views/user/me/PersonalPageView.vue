@@ -1,6 +1,6 @@
 <template>
     <section>
-        <div class="container py-5 h-100">
+        <div class="container py-5 h-100" style="margin-top: 100px;">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-8">
                     <div class="card" style="border-radius: 15px;">

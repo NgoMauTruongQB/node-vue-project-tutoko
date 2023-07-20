@@ -1,5 +1,5 @@
 <template>
-    <div style="background-color: var(--color-gray-bg);">
+    <div style="background-color: var(--color-gray-bg); margin-top: 90px; ">
         <section class="container list-flashcard-home">
             <div class="header">
                 <h2 class="mx-2 py-4 text-center">言葉 - 趣味</h2>

@@ -10,6 +10,7 @@ import FlashCardHomeView from '../views/user/flashCards/FlashCardHomeView.vue'
 import RegisterView from '../views/authentication/RegisterView.vue'
 import ForgotPasswordView from "../views/authentication/ForgotPasswordView.vue"
 import  ResetPasswordView from '../views/authentication/ResetPasswordView.vue'
+import NewPostView from '../views/user/blog/NewPostView.vue'
 
 const routes =  [
     { path: '/login', name: 'login', component: LoginView },
@@ -20,6 +21,7 @@ const routes =  [
     { path: '/notification', component: NotificationView },
     { path: '/set-cards', component:  SetCardsView },
     { path: '/flash-cards/:cardsId/home', name: 'FlashCards', component:  FlashCardHomeView},
+    { path: '/new-post', component: NewPostView},
     { path: '/', component: HomeView },
     { path: '/:catchAll(.*)', component: ErrorView }
 ]

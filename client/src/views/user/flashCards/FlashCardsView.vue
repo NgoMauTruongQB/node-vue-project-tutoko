@@ -1,5 +1,5 @@
 <template>
-    <div style="background-color: var(--color-gray-bg)">
+    <div style="background-color: var(--color-gray-bg) margin-top: 120px;">
         <div class="container">
             <h1 class="">言葉</h1>
             <!-- <div class="d-flex justify-content-center align-items-center">

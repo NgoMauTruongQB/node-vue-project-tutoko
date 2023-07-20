@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" style="margin-top: 110px; ">
         <div class="header d-flex pt-4">
             <h3 class="title">Thẻ ghi nhớ của tôi</h3>
             <i class="icon d-flex justify-content-center align-items-center">
