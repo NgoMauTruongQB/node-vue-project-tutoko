@@ -1,15 +1,15 @@
 <template>
     <div class="container">
         <div class="header p-4 pb-0">
-            <p class="title">Thông báo</p>
-            <p class="check" @click="readAllNotifications">Đánh dấu đã đọc tất cả</p>
+            <p class="title">Notifications</p>
+            <p class="check" @click="readAllNotifications">Mark all as read</p>
         </div>
         <div class="px-4">
             <button :class="['btn mb-2', { 'active': filter === 'all' }]" @click="filterNotifications('all')">
-                Tất cả
+                All
             </button>
             <button :class="['btn mb-2', { 'active': filter === 'unread' }]" @click="filterNotifications('unread')">
-                Chưa đọc
+                Unread
             </button>
         </div>
         <NotificationItem

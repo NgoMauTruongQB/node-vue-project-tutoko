@@ -27,7 +27,7 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item nav-right" @click="handleHide">
                             <router-link to="/" class="nav-link nav-title" :class="{ active: isActive('/') }"> 
-                                Trang chủ 
+                                Home 
                             </router-link>
                         </li>
                         <hr class="dropdown-divider mx-2">
@@ -40,8 +40,8 @@
                         <!-- Notification -->
                         <li class="nav-item nav-right dropdown notification" @click="handleHide">
                             <a v-if="isNavCollapse" class="nav-link">
-                                <router-link to="/notification" class="nav-link " :class="{ active: isActive('/notification') }"> 
-                                    Thông báo 
+                                <router-link to="/notification" class="nav-link " :class="{ active: isActive('/notification') }">                                  
+                                    Notifications 
                                 </router-link>
                             </a>
                             <a v-else class="nav-link nav-title" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -63,7 +63,7 @@
                                     <div class="text-center">
                                         <li><hr class="dropdown-divider m-2"></li>
                                         <router-link to="/notification" class="dropdown-item item-selection py-2"> 
-                                            Xem tất cả thông báo 
+                                            View all notifications.
                                         </router-link>
                                     </div>
                                 </li>
@@ -93,36 +93,36 @@
 
                                 <li @click="handleHide">
                                     <router-link to="/personal" class="dropdown-item item-selection py-2" :class="{ active: isActive('/personal') }"> 
-                                        Trang cá nhân 
+                                        Personal profile 
                                     </router-link>
                                 </li>
                                 <li><hr class="dropdown-divider m-2"></li>
 
                                 <li @click="handleHide">
                                     <router-link to="/set-cards" class="dropdown-item item-selection py-2" :class="{ active: isActive('/flash-cards') }"> 
-                                        Thẻ ghi nhớ
+                                        Flash Cards
+                                    </router-link>
+                                </li>
+                                <li @click="handleHide"> 
+                                    <router-link to="/" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
+                                        Write a blog
                                     </router-link>
                                 </li>
                                 <li @click="handleHide">
                                     <router-link to="/" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
-                                        Ghi chú của tôi
-                                    </router-link>
-                                </li>
-                                <li @click="handleHide">
-                                    <router-link to="/" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
-                                        Bài viết đã lưu
+                                        Saved articles
                                     </router-link>
                                 </li> 
                                 <li><hr class="dropdown-divider m-2"></li>
 
                                 <li @click="handleHide">
                                     <router-link to="/" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
-                                        Cài đặt
+                                        Settings
                                     </router-link>
                                 </li>
                                 <li @click="handleHide">
                                     <router-link to="/login" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
-                                        Đăng xuất
+                                        Log out
                                     </router-link>
                                 </li>
                             </ul>

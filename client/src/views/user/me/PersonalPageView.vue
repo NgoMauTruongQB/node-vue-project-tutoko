@@ -1,44 +1,54 @@
 <template>
-    <section>
-        <div class="container py-5 h-100" style="margin-top: 100px;">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-8">
-                    <div class="card" style="border-radius: 15px;">
-                        <div class="card-body p-4">
-                            <div class="d-flex text-black">
-                                <div class="flex-shrink-0">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
-                                    alt="Generic placeholder image" class="img-fluid"
-                                    style="width: 180px; border-radius: 10px;" />
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h5 class="mb-1">Danny McLoan</h5>
-                                    <p class="mb-2 pb-1" style="color: #2b2a2a;">
-                                        Senior Journalist
-                                    </p>
-                                    <div class="d-flex justify-content-start rounded-3 p-2 mb-2" style="background-color: #efefef;">
-                                        <div>
-                                            <p class="small text-muted mb-1"> Articles </p>
-                                            <p class="mb-0">41</p>
-                                        </div>
-                                        <div class="px-3">
-                                            <p class="small text-muted mb-1"> Followers </p>
-                                            <p class="mb-0">976</p>
-                                        </div>
-                                        <div>
-                                            <p class="small text-muted mb-1"> Rating </p>
-                                            <p class="mb-0">8.5</p>
-                                        </div>
+    <section class="profile" style="margin-top: 120px">
+        <div class="container py-3">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-lg-8 col-md-10">
+                    <div class="header mx-2">
+                        <div class="row">
+                            <div class="col-7 col-md-8 text-black">
+                                <h4 class="row">Mậu Trường</h4>
+                                <div class="account mb-2">
+                                    <div class="row d-flex justify-content-center align-items-center">
+                                        @03.nmt
                                     </div>
-                                    <div class="d-flex pt-1">
-                                        <button type="button" class="btn btn-outline-primary me-1 flex-grow-1">
-                                            Chat
-                                        </button>
-                                        <button type="button" class="btn btn-primary flex-grow-1">
-                                            Follow
-                                        </button>
-                                    </div>
+                                    <div class="mx-3 follow d-flex justify-content-center align-items-center px-3">Follow</div>
                                 </div>
+                                <div class="row">
+                                    <hr class="my-2">
+                                </div>
+                                <div class="row my-2 status">
+                                    Mậu Trường quyết tâm thi đỗ N3 😜
+                                </div>
+                                <div class="row" style="color: #999999;">
+                                    120 followers
+                                </div>
+                            </div>
+                            <div class="col-5 col-md-4 avatar rounded-circle d-flex justify-content-end">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                                alt="Avatar" class="rounded-circle" />
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="body">
+                        <div class="sub-nav my-5">
+                            <div class="row">
+                                <div 
+                                    class="blog col text-center py-2"
+                                    @click="blogActive"
+                                    :class="[ isBlog ? 'active' : '']"
+                                >
+                                    Blog
+                                </div>
+                                <div 
+                                    class="card-shared col text-center py-2"
+                                    @click="cardSharedActive"
+                                    :class="[ isBlog ? '' : 'active']"
+                                >
+                                    Card
+                                </div>
+                            </div>
+                            <div>
+                                <PostBlog />
                             </div>
                         </div>
                     </div>
@@ -49,11 +59,80 @@
 </template>
 
 <script>
+import { ref } from 'vue'
+import PostBlog from '../../../components/blog/PostBlog.vue'
+
 export default {
-    name: 'PersonalPageView'
+    components: { PostBlog },
+    setup() {
+        const isBlog = ref(true)
+
+        const blogActive = () => {
+            isBlog.value = true
+        }
+
+        const cardSharedActive = () => {
+            isBlog.value = false
+        }
+
+        return {
+            isBlog,
+            blogActive,
+            cardSharedActive
+        }
+    }
 }
 </script>
 
-<style>
+<style scoped>
+.container {
+    min-height: 100vh;
+}
 
+.account {
+    display: flex;
+}
+
+.account .follow {
+    background-color: var(--color-gray-light);
+    border-radius: 2rem;
+    color: #999999;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.avatar img {
+    width: 180px;
+}
+
+.blog, .card-shared {
+    font-weight: 600;
+    color: #999999;
+    cursor: pointer;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.active {
+    border-bottom: 1px solid #000;
+    color: #000;
+    transition: ease-in-out 0.3s;
+}
+
+@media screen and (max-width: 992px) {
+    .avatar img {
+        width: 140px;
+        height: 140px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .profile {
+        font-size: 13px;
+    }
+
+    .avatar img {
+        width: 120px;
+        height: 120px;
+    }
+}
 </style>

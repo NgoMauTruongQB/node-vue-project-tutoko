@@ -16,36 +16,36 @@
                         <hr class="w-100 clearfix d-md-none" />
 
                         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-                            <h6 class="text-uppercase mb-4 font-weight-bold text-title">Về Tutoko</h6>
-                            <p><a class="gray text-decoration-none">Giới thiệu</a></p>
-                            <p><a class="gray text-decoration-none">Điều khoản</a></p>
-                            <p><a class="gray text-decoration-none">Bảo mật</a></p>
-                            <p><a class="gray text-decoration-none">Trợ giúp</a></p>
+                            <h6 class="text-uppercase mb-4 font-weight-bold text-title">About Tutoko</h6>
+                            <p><a class="gray text-decoration-none">Introduction</a></p>
+                            <p><a class="gray text-decoration-none">Terms and conditions</a></p>
+                            <p><a class="gray text-decoration-none">Security</a></p>
+                            <p><a class="gray text-decoration-none">Help</a></p>
                         </div>
 
                         <hr class="w-100 clearfix d-md-none" />
 
                         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                            <h6 class="text-uppercase mb-4 font-weight-bold text-title">Công cụ</h6>
+                            <h6 class="text-uppercase mb-4 font-weight-bold text-title">Tool</h6>
                             <p><a class="gray text-decoration-none">Flash Card</a></p>
-                            <p><a class="gray text-decoration-none">Làm kiểm tra</a></p>
-                            <p><a class="gray text-decoration-none">Bài tập</a></p>
-                            <p><a class="gray text-decoration-none">Ghi chú</a></p>
+                            <p><a class="gray text-decoration-none">Examination</a></p>
+                            <p><a class="gray text-decoration-none">Exercise</a></p>
+                            <p><a class="gray text-decoration-none">Note</a></p>
                         </div>
 
                         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-                            <h6 class="text-uppercase mb-4 font-weight-bold text-title">Về Tutoko</h6>
-                            <p><a class="gray text-decoration-none">Giới thiệu</a></p>
-                            <p><a class="gray text-decoration-none">Điều khoản</a></p>
-                            <p><a class="gray text-decoration-none">Bảo mật</a></p>
-                            <p><a class="gray text-decoration-none">Trợ giúp</a></p>
+                            <h6 class="text-uppercase mb-4 font-weight-bold text-title">About Tutoko</h6>
+                            <p><a class="gray text-decoration-none">Introduction</a></p>
+                            <p><a class="gray text-decoration-none">Terms and conditions</a></p>
+                            <p><a class="gray text-decoration-none">Security</a></p>
+                            <p><a class="gray text-decoration-none">Help</a></p>
                         </div>
 
                         <hr class="w-100 clearfix d-md-none" />
 
                         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                            <h6 class="text-uppercase mb-4 font-weight-bold text-title">Liên hệ</h6>
-                            <p class="gray"><i class="fas fa-home mr-3"></i> Đà Nẵng, Việt Nam</p>
+                            <h6 class="text-uppercase mb-4 font-weight-bold text-title">Contact</h6>
+                            <p class="gray"><i class="fas fa-home mr-3"></i> Da Nang, Viet Nam</p>
                             <p class="gray"><i class="fas fa-envelope mr-3"></i> truongngo2707@gmail.com</p>
                             <p class="gray"><i class="fas fa-phone mr-3"></i> + 84 921 233 432</p>
                             <p class="gray"><i class="fas fa-print mr-3"></i> + 84 354 714 107 </p>
@@ -60,7 +60,7 @@
                         <div class="col-md-7 col-lg-8 text-center text-md-start">
                             <div class="p-3" style="opacity: 0.5;">
                                 © 2023 :
-                                <a class="text-white text-decoration-none font-weight-light" href="#"> TUTOKO - Giải pháp hàng đầu cho sự đồng hành cùng trẻ.</a>
+                                <a class="text-white text-decoration-none font-weight-light" href="#"> TUTOKO - The leading solution for accompanying children.</a>
                             </div>
                         </div>
 

@@ -2,7 +2,8 @@
     <div class="new-post">
         <header class="inverted" style="margin-top: 100px;">
             <div class="d-flex justify-content-end algin-items-center m-3">
-                <button class="btn">Create a post</button>
+                <button class="btn mx-2" @click="emptyEditor">Clear</button>
+                <button class="btn">Create</button>
             </div>
         </header>
         <div id="new-post-view" style="min-height: 100vh">
@@ -11,7 +12,7 @@
                 v-model="editorData" 
                 @ready="onReady" 
                 @input="onChange" 
-                :config="editorConfig"
+                @blur="onEditorBlur"
             >
             </ckeditor>
         </div>
@@ -31,17 +32,31 @@
         setup() {
             const editor = ref(ClassicEditor)
             const editorData = ref('<p>"Enter the content here.."</p>')
+
             const onReady = ( editor ) => {
                 console.log( 'CKEditor5 Vue Component is ready to use!', editor )
             }
+
             const onChange = ( data ) => {
                 console.log( data )
             }
+
+            const onEditorBlur = () => {
+                console.log( editorData.value )
+            }
+
+            const emptyEditor = () => {
+                editorData.value = '';
+            }
+            
+
             return {
                 editor,
                 editorData,
                 onChange,
-                onReady
+                onReady,
+                emptyEditor,
+                onEditorBlur
             }
         }
     }

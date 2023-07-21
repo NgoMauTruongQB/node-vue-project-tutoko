@@ -7,16 +7,16 @@
                 <div class="body text-center py-5">
                     <FireWork />
                     <img src="../../assets/img/icon/applause.png" alt="">
-                    <h4 class="mt-2 py-5">Chúc mừng! Bạn đã học tất cả các thẻ.</h4>
+                    <h4 class="mt-2 py-5">Congratulations! You learned all the cards.</h4>
                 </div>
                 <div class="footer">
                     <div class="directional">
                         <div class="back-to-card mx-3 d-flex justify-content-start"> 
                             <IconArrow class=" rotate-180" />
-                            <p class="study my-1 mx-2">Học lại </p>
+                            <p class="study my-1 mx-2">Learn again </p>
                         </div>
                         <div class="mx-3 d-flex justify-content-end"> 
-                            <p class="practice my-1 mx-2"> Luyện tập </p>
+                            <p class="practice my-1 mx-2"> Practice </p>
                             <IconArrow/>
                         </div>
                     </div>
