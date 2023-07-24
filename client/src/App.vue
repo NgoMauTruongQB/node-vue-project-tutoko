@@ -1,40 +1,34 @@
-<template>
-    <div>
-        <SiteNavBar v-if="!isHide"/>
-        <main>
-            <RouterView />
-        </main>
-        <SiteFooter v-if="!isHide"/>
-    </div>
-</template>
-
-<script>
+<script setup>
 import { useRoute } from 'vue-router'
-import { watch, ref } from 'vue'
-import SiteNavBar from './components/partials/SiteNavbar.vue'
-import SiteFooter from './components/partials/SiteFooter.vue'
+import { computed, markRaw, watch, ref } from 'vue'
 
-export default {
-    name: 'App',
-    components: {
-        SiteNavBar,
-        SiteFooter
-    },
-    setup() {
-        const isHide = ref(false)
-        const route = useRoute()
-        watch(
-            () => route.path,
-            (newPath) => {
-                isHide.value = newPath === '/login' || newPath === '/register' || newPath === '/forgot-password' || newPath === '/reset-password'
+const defaultLayout = 'DefaultLayout'
+const route = useRoute()
+const layout = ref() 
+
+watch(
+    () => route.meta?.layout,
+    async (metaLayout) => {
+        try {
+            let component = await import(`./layouts/${defaultLayout}.vue`)
+
+            if(metaLayout) {
+                component = await import(`./layouts/${metaLayout}.vue`)
             }
-        )
-
-        return {
-            isHide
+            layout.value = markRaw(component?.default)
+        } catch (error) {
+            layout.value = markRaw(defaultLayout)
+            layout.value = markRaw(component)
         }
-    }
-}
+    },
+    { immediate: true}
+)
+
+
 </script>
-<style scoped>
-</style>
+
+<template>
+    <component :is="layout">
+        <router-view />
+    </component>
+</template>

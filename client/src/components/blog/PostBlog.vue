@@ -47,7 +47,7 @@
                 </label>
             </div>
         </div>
-        <Comment />
+        <Comment class="mt-5"/>
         <hr class="line">
     </section>
 </template>

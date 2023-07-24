@@ -9,21 +9,31 @@ import LoginView from '../views/authentication/LoginView.vue'
 import FlashCardHomeView from '../views/user/flashCards/FlashCardHomeView.vue'
 import RegisterView from '../views/authentication/RegisterView.vue'
 import ForgotPasswordView from "../views/authentication/ForgotPasswordView.vue"
-import  ResetPasswordView from '../views/authentication/ResetPasswordView.vue'
+import ResetPasswordView from '../views/authentication/ResetPasswordView.vue'
 import NewPostView from '../views/user/blog/NewPostView.vue'
+
+import DashboardView from '../views/admin/DashboardView.vue'
 
 const routes =  [
     { path: '/login', name: 'login', component: LoginView },
-    { path: '/register', name: 'register', component:  RegisterView},
+    { path: '/register', name: 'register', component:  RegisterView },
     { path: '/forgot-password', name: 'forgot-password', component: ForgotPasswordView },
-    { path: '/reset-password', name: 'reset-password', component: ResetPasswordView},
+    { path: '/reset-password', name: 'reset-password', component: ResetPasswordView },
     { path: '/personal', component: PersonalPageView },
     { path: '/notification', component: NotificationView },
     { path: '/set-cards', component:  SetCardsView },
-    { path: '/flash-cards/:cardsId/home', name: 'FlashCards', component:  FlashCardHomeView},
-    { path: '/new-post', component: NewPostView},
+    { path: '/flash-cards/:cardsId/home', name: 'FlashCards', component:  FlashCardHomeView },
+    { path: '/new-post', component: NewPostView },
     { path: '/', component: HomeView },
-    { path: '/:catchAll(.*)', component: ErrorView }
+    { path: '/manager', name: 'manager', redirect: { name: 'dashboard'},
+        children: [
+            { path: 'dashboard', name: 'dashboard', component: DashboardView, meta: { layout: 'ManagerLayout' } },
+
+        ]
+    },
+    { path: '/404', name: 'notfound', component: ErrorView, meta: { layout: 'NotFoundLayout'} },
+    { path: '/:pathMatch(.*)*', redirect: { name: 'notfound'} },
+
 ]
 
 const router = createRouter({
