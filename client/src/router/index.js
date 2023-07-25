@@ -11,6 +11,7 @@ import RegisterView from '../views/authentication/RegisterView.vue'
 import ForgotPasswordView from "../views/authentication/ForgotPasswordView.vue"
 import ResetPasswordView from '../views/authentication/ResetPasswordView.vue'
 import NewPostView from '../views/user/blog/NewPostView.vue'
+import BlogView from '../views/user/blog/BlogView.vue'
 
 import DashboardView from '../views/admin/DashboardView.vue'
 
@@ -25,10 +26,10 @@ const routes =  [
     { path: '/flash-cards/:cardsId/home', name: 'FlashCards', component:  FlashCardHomeView },
     { path: '/new-post', component: NewPostView },
     { path: '/', component: HomeView },
+    { path: '/blog', name: 'blog', component: BlogView},
     { path: '/manager', name: 'manager', redirect: { name: 'dashboard'},
         children: [
             { path: 'dashboard', name: 'dashboard', component: DashboardView, meta: { layout: 'ManagerLayout' } },
-
         ]
     },
     { path: '/404', name: 'notfound', component: ErrorView, meta: { layout: 'NotFoundLayout'} },
