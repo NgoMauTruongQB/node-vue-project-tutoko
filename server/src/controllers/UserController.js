@@ -1,9 +1,10 @@
 const express = require('express')
 const Users = require('../models/Users')
+const bcrypt = require('bcrypt')
 
 class UserControllers {
 
-    // [GET] /users/all-users
+    // [GET] /users
     async getAll(req, res, next) {
         await Users.find()
             .then(users => {
@@ -36,13 +37,16 @@ class UserControllers {
             })
     }
 
-    // [POST] /users/add-user
+    // [POST] /users
     async addUser(req, res, next) {
+        const password = req.body.password
+        const hashedPassword = await bcrypt.hash(password, 10)
         const user = new Users({
             username: req.body.username,
             email: req.body.email,
-            password: req.body.password,
+            password: hashedPassword,
             phone: req.body.phone,
+            role: req.body.role,
             status: req.body.status,
         })
         await user.save()

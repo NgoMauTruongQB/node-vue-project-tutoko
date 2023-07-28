@@ -1,14 +1,10 @@
 const userRouter = require('./users')
-
-// function route(app) {
-//     app.use('/users', userRouter)
-// }
-
-// module.exports = route
+const authRouter = require('./auth')
 
 const router = require('express').Router()
 
 router.use('/users', userRouter)
+router.use('/auth', authRouter)
 
 module.exports = router
 
