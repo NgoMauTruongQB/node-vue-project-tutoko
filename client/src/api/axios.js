@@ -1,10 +1,9 @@
 import axios from 'axios'
 
 const instance = axios.create({
-    baseURL: import.meta.env.VITE_APP_ENDPOINT_URL,
-    
-    withCredentials: true,
-});
+    baseURL: import.meta.env.VITE_APP_API,
+    timeout: 10000,
+})
 
 instance.interceptors.request.use(
     function (config) {
@@ -20,9 +19,8 @@ instance.interceptors.response.use(
         return response.data
     }, 
     function (error) {
-        return Promise.reject(error);
+        return Promise.reject(error)
     }
 )
 
 export default instance
-  

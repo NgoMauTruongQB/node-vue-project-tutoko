@@ -3,10 +3,12 @@ const helmet = require('helmet')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 const app = express()
 
 // Middleware 
+app.use(cors())
 app.use(express.json())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -28,7 +30,5 @@ app.use(routes)
 // Using ErrorHandler Middleware
 const errorHandler = require('./middlewares/errorHandler')
 app.use(errorHandler)
-
-
 
 module.exports = app

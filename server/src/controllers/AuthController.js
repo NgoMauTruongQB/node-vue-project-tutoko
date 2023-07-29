@@ -2,15 +2,16 @@ const express = require('express')
 const Users = require('../models/Users')
 const bcrypt = require('bcrypt')
 const UsersInformation = require('../models/UsersInformation')
+const jwt = require('jsonwebtoken')
 
 class AuthController {
 
     // [POST] /auth/register
     async register(req, res, next) {
-        const { username, email, password, phone, role, status, } = req.body
+        const { username, email, password, phone, role, status, firstname, lastname, status_caption, avatar} = req.body
         const hashedPassword = await bcrypt.hash(password, 10)
         
-        const user = new Users({
+        const user = await new Users({
             username,
             email,
             password: hashedPassword,
@@ -18,12 +19,12 @@ class AuthController {
             role,
             status
         })
-        const usersInformation = new UsersInformation({
+        const usersInformation = await new UsersInformation({
             User_id: user._id,
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            status_caption: req.body.status_caption,
-            avatar: req.body.avatar,
+            firstname,
+            lastname,
+            status_caption,
+            avatar,
         })
 
         const errors = []
@@ -39,7 +40,7 @@ class AuthController {
 
         if (errors.length > 0) {
             res.json({
-            message: errors.join(", "),
+                message: errors.join(", "),
             })
             return
         }
@@ -54,6 +55,40 @@ class AuthController {
                 next(err)
             })
     }
+
+    // [POST] /auth/login
+    async login(req, res, next) {
+        const { username, password } = req.body
+
+        const user = await Users.findOne({
+            username,
+        })
+
+        if (!user) {
+            res.status(404).json({
+                message: 'Username does not exits'
+            })
+            return
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, user.password)
+
+        if (isPasswordValid) {
+            const token = jwt.sign({
+                _id: user._id,
+            }, process.env.JWT_TOKEN)
+            res.status(200).json({
+                
+                message: 'Login successful',
+                token,
+            });
+        } else {
+            res.status(401).json({
+                message: 'Password is incorrect',
+            })
+        }
+    }
+    
 }
 
 module.exports = new AuthController

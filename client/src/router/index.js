@@ -16,10 +16,6 @@ import BlogView from '../views/user/blog/BlogView.vue'
 import DashboardView from '../views/admin/DashboardView.vue'
 
 const routes =  [
-    { path: '/login', name: 'login', component: LoginView },
-    { path: '/register', name: 'register', component:  RegisterView },
-    { path: '/forgot-password', name: 'forgot-password', component: ForgotPasswordView },
-    { path: '/reset-password', name: 'reset-password', component: ResetPasswordView },
     { path: '/personal', component: PersonalPageView },
     { path: '/notification', component: NotificationView },
     { path: '/set-cards', component:  SetCardsView },
@@ -32,6 +28,10 @@ const routes =  [
             { path: 'dashboard', name: 'dashboard', component: DashboardView, meta: { layout: 'ManagerLayout' } },
         ]
     },
+    { path: '/login', name: 'login', component: LoginView, meta: { layout: 'AuthLayout' } },
+    { path: '/register', name: 'register', component: RegisterView, meta: { layout: 'AuthLayout' } },
+    { path: '/forgot-password', name: 'forgot-password', component: ForgotPasswordView, meta: { layout: 'AuthLayout' } },
+    { path: '/reset-password', name: 'reset-password', component: ResetPasswordView, meta: { layout: 'AuthLayout' } },
     { path: '/404', name: 'notfound', component: ErrorView, meta: { layout: 'NotFoundLayout'} },
     { path: '/:pathMatch(.*)*', redirect: { name: 'notfound'} },
 

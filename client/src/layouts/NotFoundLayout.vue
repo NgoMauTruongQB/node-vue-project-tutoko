@@ -5,7 +5,3 @@
 <template>
     <ErrorView/>
 </template>
-
-<style>
-
-</style>
