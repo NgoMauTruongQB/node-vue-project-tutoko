@@ -1,11 +1,12 @@
 <template>
 <div class="global-container">
-    <ToastInfor/>
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <ToastInfor v-for="toast in toasts" :key="toast.id" :message="toast.message" :status="toast.status" :title="toast.title" />
+    </div>
     <div class="card login-form">
         <div class="card-body">
-            <h3 class="card-title text-center mb-5">Log in to Tutoko</h3>
+            <h3 class="card-title text-center my-5">Log in to Tutoko</h3>
             <div class="card-text">           
-                <div class="alert alert-danger alert-dismissible fade show my-3" role="alert">Incorrect username or password.</div>
                 <form @submit.prevent="login">
                     <div class="form-group my-3">
                         <label for="username">Username</label>
@@ -30,7 +31,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import authApi from '../../api/authApi.js'
 import ToastInfor from '../../components/toast/ToastInfor.vue'
 export default {
@@ -38,29 +39,42 @@ export default {
     setup() {
         const username = ref('')
         const password = ref('')
-    
+        const toasts = reactive([])
+
         const login = async () => {
             authApi.signIn({
                 username: username.value,
                 password: password.value
             })
             .then(response => {
-                console.log(response)
+                toasts.push({
+                    message: response.message,
+                    status: 'success',
+                    title: 'Success'
+                })
             })
             .catch(error => {
-                if (error.response && error.response.status === 401) {
-                    console.log(error.response.data.message)
-                } else if(error.response && error.response.status === 404) {
-                    console.log(error.response.data.message)
+                if (error.response && error.response.status === 401 || error.response.status === 404) {
+                    toasts.push({
+                        message: error.response.data.message,
+                        status: 'warning',
+                        title: 'Warning'
+                    })
                 } else {
-                    console.log("Đã xảy ra lỗi:", error.message)
+                    toasts.push({
+                        message: error.message,
+                        status: 'danger',
+                        title: 'Error'
+                    })
                 }
             })
         }
+
         return {
             login,
             username,
-            password
+            password,
+            toasts
         }
     }
 }

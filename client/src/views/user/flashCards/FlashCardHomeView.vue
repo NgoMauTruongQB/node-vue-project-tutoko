@@ -99,7 +99,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mx-2 my-4 d-flex justify-content-end align-itém-center">
+                    <div class="mx-2 my-4 d-flex justify-content-end align-items-center">
                         <button class="btn btn-save-all">Save all</button>
                     </div>
                     </div>
