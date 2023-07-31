@@ -1,4 +1,4 @@
-import uploadApi from "../api/uploadApi";
+import uploadApi from "../api/uploadApi"
 
 export default function uploadImage(loader) {
     return {

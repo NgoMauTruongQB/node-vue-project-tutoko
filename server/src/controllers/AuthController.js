@@ -3,6 +3,7 @@ const Users = require('../models/Users')
 const bcrypt = require('bcrypt')
 const UsersInformation = require('../models/UsersInformation')
 const jwt = require('jsonwebtoken')
+const generateTokens = require('../middlewares/generateTokens')
 
 class AuthController {
 
@@ -56,7 +57,7 @@ class AuthController {
             })
     }
 
-    // [POST] /auth/login
+    // [POST] /auth/sign-in
     async login(req, res, next) {
         const { username, password } = req.body
 
@@ -74,21 +75,64 @@ class AuthController {
         const isPasswordValid = await bcrypt.compare(password, user.password)
 
         if (isPasswordValid) {
-            const token = jwt.sign({
-                _id: user._id,
-            }, process.env.JWT_TOKEN)
+            const token = generateTokens(user._id)
+            await Users.findOneAndUpdate({ _id: user._id }, { refreshToken: token.refreshToken })
             res.status(200).json({
-                
                 message: 'Login successful',
-                token,
-            });
+                refreshToken: token.refreshToken,
+                accessToken: token.accessToken,
+            })
         } else {
             res.status(401).json({
                 message: 'Password is incorrect',
             })
         }
     }
-    
+
+    // [POST] /auth/sign-out
+    async logout(req, res, next) {
+        try {
+            var accessToken = req.cookies.accessToken
+            const decodedToken = await jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET)
+            await Users.findOneAndUpdate( { _id: decodedToken._id }, { refreshToken: ""})
+            res.status(200).json({
+                message: 'Logout successful',
+                accessToken: '',
+            })
+        } catch (error) {
+            res.status(500).json({ message: 'You are not logged in, so you cannot logout.' })
+        }
+    }
+
+    // [GET] /auth/refresh-token
+    async refresh(req, res, next) {
+        try {
+            const authorizationHeader = req.headers.authorization
+            if (authorizationHeader) {
+                const bearerToken = authorizationHeader.split('Bearer ')[1]
+                const decodedToken = jwt.verify(bearerToken, process.env.REFRESH_TOKEN_SECRET)
+                const user = await Users.findOne({ _id: decodedToken._id })
+                if (user) {
+                    const accessToken = jwt.sign({
+                        _id: user._id,
+                    }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 900 })
+                    res.status(200).json({
+                        accessToken,
+                    })
+                } else {
+                    res.status(401).json({
+                        message: 'You have not signed in',
+                    })
+                }
+            } else {
+                res.status(403).json({
+                    message: 'No authorization header found',
+                })
+            }
+        } catch (error) {
+            res.status(500).json({ error })
+        }
+    }
 }
 
 module.exports = new AuthController

@@ -9,6 +9,7 @@ const UsersSchema = new Schema({
     phone: { type: String, required: true, unique: true },
     role: { type: Number, required: true, enum: [ 1,  2 ] },
     status: { type: Boolean, required: true },
+    refreshToken: { type: String }
 }, {
     timestamps: true,
 })

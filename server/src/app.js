@@ -4,14 +4,23 @@ const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const cookieParser = require('cookie-parser')
+require('dotenv').config()
+
 
 const app = express()
 
 // Middleware 
-app.use(cors())
+app.use(
+    cors({
+        origin: process.env.CLIENT_ORIGIN,
+        credentials: true,
+    })
+)
 app.use(express.json())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cookieParser())
 
 app.use(express.urlencoded({ extended: true}))
 app.use(helmet())

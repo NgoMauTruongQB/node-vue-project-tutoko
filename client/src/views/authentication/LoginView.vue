@@ -1,8 +1,5 @@
 <template>
 <div class="global-container">
-    <div class="toast-container position-fixed top-0 end-0 p-3">
-        <ToastInfor v-for="toast in toasts" :key="toast.id" :message="toast.message" :status="toast.status" :title="toast.title" />
-    </div>
     <div class="card login-form">
         <div class="card-body">
             <h3 class="card-title text-center my-5">Log in to Tutoko</h3>
@@ -26,6 +23,8 @@
             </div>
         </div>
     </div>
+    <button @click="logout">Logout test</button>
+    <button @click="rf">RefreshToken</button>
 </div>
 
 </template>
@@ -33,13 +32,17 @@
 <script>
 import { ref, reactive } from 'vue'
 import authApi from '../../api/authApi.js'
-import ToastInfor from '../../components/toast/ToastInfor.vue'
+import router from '../../router'
+import refreshAccessToken from '../../utils/refreshAccessToken'
+
+import { useToastStore } from '../../stores/toast'
+
 export default {
-    components: { ToastInfor },
     setup() {
         const username = ref('')
         const password = ref('')
-        const toasts = reactive([])
+
+        const storeToast = useToastStore()
 
         const login = async () => {
             authApi.signIn({
@@ -47,34 +50,52 @@ export default {
                 password: password.value
             })
             .then(response => {
-                toasts.push({
-                    message: response.message,
-                    status: 'success',
-                    title: 'Success'
-                })
+                const accessToken = {
+                    name: 'accessToken',
+                    value: response.accessToken,
+                    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30), 
+                }
+                document.cookie = `${accessToken.name}=${accessToken.value}; expires=${accessToken.expires.toUTCString()}`
+                localStorage.setItem('refreshToken', response.refreshToken)
+
+                storeToast.addToast(response.message, 'success', 'Success')
+                router.push({ path: '/'})
             })
             .catch(error => {
-                if (error.response && error.response.status === 401 || error.response.status === 404) {
-                    toasts.push({
-                        message: error.response.data.message,
-                        status: 'warning',
-                        title: 'Warning'
-                    })
+                if (error.response ) {
+                    storeToast.addToast(error.response.data.message, 'warning', 'Warning')
                 } else {
-                    toasts.push({
-                        message: error.message,
-                        status: 'danger',
-                        title: 'Error'
-                    })
+                    storeToast.addToast(error.message, 'danger', 'Error')
                 }
             })
         }
 
+        const logout = async () => {
+            authApi.signOut()
+            .then( response => {
+                document.cookie = `${'accessToken'}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+                localStorage.removeItem('refreshToken')
+                router.push({ path: '/login'})
+            })
+            .catch( error => {
+                const message = error.response.data.message || error.message
+                storeToast.addToast(message, 'danger', 'Error')
+            })
+        }
+
+        console.log(storeToast.totalToast)
+
+        const rf = async () => {
+            refreshAccessToken()
+        }
+        
         return {
             login,
             username,
             password,
-            toasts
+            storeToast,
+            logout,
+            rf
         }
     }
 }
