@@ -27,7 +27,7 @@ export default {
 
         setTimeout(() => {
             handleClose()
-        }, 6000)
+        }, 5000)
 
         return {
             visibility,
@@ -40,11 +40,11 @@ export default {
 <style scoped>
 .toast {
     border: none;
+    background-color: var(--color-white);
 }
 
 .show {
-    animation: show_toast 0.2s ease forwards;
-    animation-duration: 1s;
+    animation: show_toast 0.8s ease forwards;
 }
 
 .toast::before {
@@ -54,7 +54,7 @@ export default {
     width: 100%;
     bottom: 0px;
     left: 0px;
-    animation: progress 6s linear forwards;
+    animation: progress 5s linear forwards;
     border-radius: 4px;
 }
 
@@ -77,7 +77,7 @@ export default {
 
 .toast.success::before,
 .success .toast-header {
-    background-color: var(--color-success);
+    background-color: var(--color-blue);
 }
 
 .toast.danger::before,

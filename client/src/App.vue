@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="global-container">
-        <div class="toast-container position-fixed top-0 end-0 p-3" >
+        <div class="toast-container position-fixed bottom-0 end-0 p-3" >
             <ToastInfor v-for="toast in storeToast.toasts" :key="toast.id" :message="toast.message" :status="toast.status" :title="toast.title" />
         </div>
     </div>

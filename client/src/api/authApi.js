@@ -9,12 +9,8 @@ const authApi = {
     signIn: async (data) => {
         return await instance.post(nameModel + '/sign-in', data)
     },
-    getCurrentUser: async (accessToken) => {
-        return await instance.get(nameModel + '/sign-in', {
-            headers: {
-                Authorization: 'Tutoko' + accessToken
-            }
-        })
+    getCurrentUser: async () => {
+        return await instance.get(nameModel + '/user-informations')
     },
     signOut: async () => {
         return await instance.post(nameModel + '/sign-out')

@@ -23,8 +23,6 @@
             </div>
         </div>
     </div>
-    <button @click="logout">Logout test</button>
-    <button @click="rf">RefreshToken</button>
 </div>
 
 </template>
@@ -33,9 +31,9 @@
 import { ref, reactive } from 'vue'
 import authApi from '../../api/authApi.js'
 import router from '../../router'
-import refreshAccessToken from '../../utils/refreshAccessToken'
 
 import { useToastStore } from '../../stores/toast'
+import { useUserStore } from '../../stores/user'
 
 export default {
     setup() {
@@ -43,6 +41,7 @@ export default {
         const password = ref('')
 
         const storeToast = useToastStore()
+        const storeUser = useUserStore()
 
         const login = async () => {
             authApi.signIn({
@@ -59,6 +58,7 @@ export default {
                 localStorage.setItem('refreshToken', response.refreshToken)
 
                 storeToast.addToast(response.message, 'success', 'Success')
+                storeUser.onLogin(true)
                 router.push({ path: '/'})
             })
             .catch(error => {
@@ -69,33 +69,12 @@ export default {
                 }
             })
         }
-
-        const logout = async () => {
-            authApi.signOut()
-            .then( response => {
-                document.cookie = `${'accessToken'}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
-                localStorage.removeItem('refreshToken')
-                router.push({ path: '/login'})
-            })
-            .catch( error => {
-                const message = error.response.data.message || error.message
-                storeToast.addToast(message, 'danger', 'Error')
-            })
-        }
-
-        console.log(storeToast.totalToast)
-
-        const rf = async () => {
-            refreshAccessToken()
-        }
         
         return {
             login,
             username,
             password,
             storeToast,
-            logout,
-            rf
         }
     }
 }

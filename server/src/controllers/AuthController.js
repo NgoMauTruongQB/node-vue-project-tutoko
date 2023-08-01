@@ -1,9 +1,9 @@
 const express = require('express')
 const Users = require('../models/Users')
 const bcrypt = require('bcrypt')
-const UsersInformation = require('../models/UsersInformation')
 const jwt = require('jsonwebtoken')
 const generateTokens = require('../middlewares/generateTokens')
+const UsersInformation = require('../models/UsersInformation')
 
 class AuthController {
 
@@ -92,9 +92,9 @@ class AuthController {
     // [POST] /auth/sign-out
     async logout(req, res, next) {
         try {
-            var accessToken = req.cookies.accessToken
-            const decodedToken = await jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET)
-            await Users.findOneAndUpdate( { _id: decodedToken._id }, { refreshToken: ""})
+            const authorizationHeader = req.headers.authorization
+            const bearerToken = authorizationHeader.split('Bearer ')[1]
+            await Users.findOneAndUpdate( { refreshToken: bearerToken }, { refreshToken: ""})
             res.status(200).json({
                 message: 'Logout successful',
                 accessToken: '',
@@ -102,6 +102,22 @@ class AuthController {
         } catch (error) {
             res.status(500).json({ message: 'You are not logged in, so you cannot logout.' })
         }
+    }
+
+    // [GET] /auth/user-informations
+    async currentUser(req, res, next) {
+        try {
+            const user = await Users.findById({ _id: req.userId})
+            const usersInformation = await UsersInformation.findOne({ User_id: req.userId})
+            res.status(200).json({
+                message: 'Successfully!',
+                user: user,
+                usersInformation: usersInformation,
+            })
+        } catch (error) {
+            res.status(500).json({ message: 'Not Permisstion!' })
+        }
+        
     }
 
     // [GET] /auth/refresh-token

@@ -1,27 +1,54 @@
 const jwt = require('jsonwebtoken')
 const Users = require('../models/Users')
-require('dotenv').config()
 
-module.exports = (req, res, next) => {
-    
+const verifyAccessToken = (accessToken) => {
     try {
-        const token = req.cookies.token
-        const idUser = jwt.verify(token, process.env.JWT_TOKEN)
-        Users.findOne({
-            _id: idUser
-        })
-        .then(data => {
-            if(data) {
-                req.data = data
-                next()
-            } else {
-                res.json('Not permisstion')
-            }
-        })
-        .catch(err => {
+        return jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET)
+    } catch (err) {
+        return null
+    }
+}
 
-        })
-    } catch (error) {
-        res.status(500).json('Invalid token')
+const checkRefreshTokenInDatabase = async (refreshToken) => {
+    try {
+        const token = await Users.findOne({ refreshToken: refreshToken })
+        if (token) {
+            const data = await jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET)
+            return data
+        } else {
+            return null
+        }
+    } catch (err) {
+        return null
+    }
+}
+
+module.exports = async (req, res, next) => {
+    const accessToken = req.cookies.accessToken
+
+    const authorizationHeader = req.headers.authorization
+    const refreshToken = authorizationHeader && authorizationHeader.startsWith('Bearer ') ? authorizationHeader.split('Bearer ')[1] : null
+
+    if (!accessToken && !refreshToken) {
+        return res.status(401).json({ message: 'Access token and refresh token not found.' })
+    }
+
+    const decodedAccessToken = verifyAccessToken(accessToken)
+
+    if (decodedAccessToken) {
+        req.userId = decodedAccessToken._id
+        return next()
+    } else {
+        const isValidRefreshToken = await checkRefreshTokenInDatabase(refreshToken)
+
+        if (isValidRefreshToken) {
+            const newAccessToken = jwt.sign({ _id: isValidRefreshToken._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 300 })
+            res.cookie('accessToken', newAccessToken, { httpOnly: true, maxAge: 300000 })
+
+            req.userId = isValidRefreshToken._id;
+            return next()
+        } else {
+            return res.status(403).json({ message: 'Invalid refresh token or refresh token not found in the database.' })
+        }
     }
 }
