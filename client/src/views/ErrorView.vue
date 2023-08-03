@@ -50,7 +50,8 @@ export default {};
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: var(--color-blue);
+    background-color: var(--color-brand);
+    
 }
 
 #notfound .notfound {
@@ -122,7 +123,7 @@ export default {};
 }
 
 .notfound .home-btn {
-    color: var(--color-blue-dark);
+    color: var(--color-brand);
     background: #fff;
 }
 
@@ -153,7 +154,7 @@ export default {};
 }
 
 .notfound-social > a:hover svg {
-    fill: var(--color-blue);
+    fill: var(--color-brand);
 }
 
 @media only screen and (max-width: 767px) {

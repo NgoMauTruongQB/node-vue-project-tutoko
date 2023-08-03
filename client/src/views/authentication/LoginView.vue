@@ -2,12 +2,16 @@
 <div class="global-container">
     <div class="card login-form">
         <div class="card-body">
-            <h3 class="card-title text-center my-5">Log in to Tutoko</h3>
+            
+            <h3 class="card-title text-center my-5">
+                Log in to Wazen
+                <img src="../../assets/img/logo/wazen2.png" width="50" alt="WAZEN">
+            </h3>
             <div class="card-text">           
                 <form @submit.prevent="login">
                     <div class="form-group my-3">
                         <label for="username">Username</label>
-                        <input type="text" v-model="username" id="username" class="form-control form-control-sm" aria-describedby="emailHelp">
+                        <input type="text" v-model="username" id="username" class="form-control form-control-sm">
                     </div>
                     <div class="form-group my-3">
                         <label for="password">Password</label>
@@ -17,7 +21,7 @@
                     <button type="submit" class="btn my-3">Sign in</button>
                     
                     <div class="sign-up my-3 text-center">
-                        Don't have an account? <a href="#" style="color: var(--color-brand)">Create One</a>
+                        Don't have an account? <router-link to="/register" style="color: var(--color-brand)">Create One</router-link>
                     </div>
                 </form>
             </div>
