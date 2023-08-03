@@ -13,6 +13,6 @@ export default {
 
 <style scoped>
 .arrow svg {
-    fill: var(--color-blue);
+    fill: var(--color-brand);
 }
 </style>

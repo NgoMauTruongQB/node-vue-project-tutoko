@@ -6,10 +6,10 @@
                     <div class="row">
                         <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
                             <div class="d-flex align-items-center mb-3">
-                                <img class="logo mx-auto" src="../../../public/img/logo/logo&brand.png" alt="Tutoko Logo">
+                                <img class="logo mx-auto" src="../../assets/img/logo/wazen3.png" alt="Tutoko Logo">
                             </div>
                             <p class="text-center">
-                                Choose us - Choose success
+                                Language - Culture blog
                             </p>
                         </div>
 
@@ -60,7 +60,7 @@
                         <div class="col-md-7 col-lg-8 text-center text-md-start">
                             <div class="p-3" style="opacity: 0.5;">
                                 © 2023 :
-                                <a class="text-white text-decoration-none font-weight-light" href="#"> TUTOKO - The leading solution for accompanying children.</a>
+                                <a class="text-white text-decoration-none font-weight-light" href="#"> Discover Japan's Soul: Language & Culture with WAZEN</a>
                             </div>
                         </div>
 
@@ -103,7 +103,7 @@ footer {
 }
 
 footer .logo {
-    width: 5rem;
+    width: 7rem;
     border-radius: 1rem;
 }
 
@@ -119,13 +119,12 @@ footer .gray {
 
 
 footer .gray:hover {
-    color: var(--color-blue);
-    font-size: 1em;
+    color: var(--color-brand);
     cursor: pointer;
 }
 
 footer a.btn:hover svg {
-    fill: var(--color-blue);
+    fill: var(--color-brand);
 }
 
 footer svg {

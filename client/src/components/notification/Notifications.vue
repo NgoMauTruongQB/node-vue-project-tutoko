@@ -5,10 +5,10 @@
             <p class="check" @click="readAllNotifications">Mark all as read</p>
         </div>
         <div class="px-4">
-            <button :class="['btn mb-2', { 'active': filter === 'all' }]" @click="filterNotifications('all')">
+            <button :class="['mb-2', { 'active': filter === 'all' }]" @click="filterNotifications('all')">
                 All
             </button>
-            <button :class="['btn mb-2', { 'active': filter === 'unread' }]" @click="filterNotifications('unread')">
+            <button :class="['mb-2', { 'active': filter === 'unread' }]" @click="filterNotifications('unread')">
                 Unread
             </button>
         </div>
@@ -136,26 +136,30 @@ p {
 .header .title {
     font-weight: 600;
     font-size: 1.4rem;
+    color: #000001;
 }
 
 .header .check {
-    color: var(--color-blue);
+    color: var(--color-brand);
     cursor: pointer;
 }
 
-.btn:hover {
+button:hover {
     background-color: var(--color-gray-light);
 }
 
-.btn {
+button {
     border-radius: 10rem;
     font-weight: 600;
+    background-color: var(--color-white);
+    border: none;
+    padding: 0.2rem 1rem;
 }
 
 .active {
     border:none;
-    background-color: var(--color-blue-light);
-    color: var(--color-blue-dark);
+    color: var(--color-brand);
+    background-color: var(--color-gray-light);
 }
 
 </style>

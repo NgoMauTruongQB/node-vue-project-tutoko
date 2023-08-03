@@ -6,7 +6,7 @@
         <div class="card mb-2 py-2">
             <div class="media d-inline-flex row">
                 <div class="col-md-2 col-2 text-center">
-                    <img src="../../../public/img/logo/logo.png">
+                    <img src="../../assets/img/logo/wazen2.png">
                 </div>
                 <div class="media-body col-md-9 col-8">
                     <h6 class="mt-2 mb-1">{{ notificationProps.name }}</h6>
@@ -16,7 +16,7 @@
                 <div class="col-md-1 col-1 d-flex align-items-center justify-content-center">
                     <span 
                         v-if="notificationProps.isRead === false"
-                        class="badge rounded-pill bg-primary p-1"
+                        class="badge rounded-pill p-1"
                     >
                         <span class="hideen"></span>
                     </span>
@@ -66,12 +66,16 @@ body {
 }
 
 .card .date {
-    color: var(--color-blue);
+    color: var(--color-brand);
     font-weight: 600;
 }
 
 .text {
 	color: var(--color-black);
+}
+
+.rounded-pill {
+    background-color: var(--color-brand);
 }
 
 @media screen and (max-width: 390px){

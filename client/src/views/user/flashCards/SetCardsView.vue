@@ -59,12 +59,12 @@ export default {
 <style>
 
 .header {
-    color: var(--color-blue-dark);
+    color: var(--color-blue-darkest);
 }
 
 .header .icon {
     position: relative;
-    background-color: var(--color-blue-dark);
+    background-color: var(--color-brand);
     margin-left: 1.6rem;
     height: 2.6rem;
     width: 2.6rem;

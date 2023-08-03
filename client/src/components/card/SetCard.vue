@@ -24,7 +24,6 @@
                         <h6 class="mb-0">{{setCardProps.type}}</h6> <span>{{setCardProps.countDay}} day ago</span>
                     </div>
                 </div>
-                <div class="badge" :class="setCardProps.scope"> <span>{{setCardProps.scope}}</span> </div>
             </div>
             <div class="mt-4">
                 <h4 class="heading">{{ setCardProps.nameCard}}<br>{{ setCardProps.author}}</h4>
@@ -94,25 +93,13 @@ export default {
     align-items: center
 }
 
-.badge.public span {
-    background-color: var(--color-success);
-}
-
-.badge.private span {
-    background-color: var(--color-danger);
-}
-
-.badge.save span {
-    background-color: var(--color-blue);
-}
-
 .progress {
-    height: 10px;
+    height: 6px;
     border-radius: 10px;
 }
 
 .progress div {
-    background-color: var(--color-blue-dark);
+    background-color: var(--color-brand);
 }
 
 .text1 {

@@ -40,7 +40,7 @@
 :root {
     --color-blue: #0675E8;
     --color-blue-dark: #1A5DB6;
-    --color-blue-darkest: #203856;
+    --color-blue-darkest: #2B3441;
     --color-gray-dark: #666;
     --color-gray-light: rgba(0, 0, 0, 0.04);
     --color-gray-bg: #f6f7fb;
@@ -51,6 +51,8 @@
     --color-warning: #fb6340;
     --color-danger: #dc3545;
     --color-yellow: #ff983a;
+
+    --color-brand: #B62F35;
 }
 
 @media (prefers-color-scheme: dark) {

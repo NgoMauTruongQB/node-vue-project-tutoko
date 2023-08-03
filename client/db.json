@@ -14,7 +14,7 @@
       "name": "Lê Hoàng Nam",
       "message": "Đã chia sẻ một ảnh mới trên trang cá nhân của anh ấy",
       "created_at": "21h10 Mar 20/2023",
-      "isRead": true
+      "isRead": false
     },
     {
       "id": 3,
@@ -46,7 +46,7 @@
       "name": "Phan Nhật Quang",
       "message": "Đã đăng một video mới trên trang cá nhân của anh ấy",
       "created_at": "18h50 Mar 23/2023",
-      "isRead": false
+      "isRead": true
     },
     {
       "id": 7,

@@ -27,7 +27,7 @@
 
 <style scoped>
 .new-post button {
-    background-color: var(--color-blue);
+    background-color: var(--color-brand);
     color: var(--color-white);
 }
 </style>

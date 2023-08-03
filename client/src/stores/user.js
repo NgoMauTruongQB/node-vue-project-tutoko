@@ -24,7 +24,6 @@ export const useUserStore = defineStore('userState', {
                         phone: data.user.phone,
                         email: data.user.email,
                     }
-                    console.log(user)
                     localStorage.setItem('site-analytic', JSON.stringify(user))
                 })
                 .catch( error => {

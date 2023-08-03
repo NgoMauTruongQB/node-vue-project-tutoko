@@ -4,8 +4,8 @@
 
             <!-- logo & brand name -->
             <router-link to="/" class="navbar-brand d-flex" :class="{ active: isActive('/') }"> 
-                <img src="../../../public/img/logo/logo.png" alt="Logo" width="64" class="d-inline-block align-text-top">
-                <h3 class="brand p-0 mb-0">Tutoko</h3>
+                <img src="../../assets/img/logo/wazen4.png" alt="Logo" width="70" class="d-inline-block align-text-top">
+                <h3 class="brand p-0 mb-0">Wazen</h3>
             </router-link>
 
             <!-- SideNav -->
@@ -86,9 +86,9 @@
                                 <ul :class="[isNavCollapse ? 'px-0' : 'dropdown-menu dropdown-menu-lg-end slide-bottom']" style="positon: abslute">
                                     <li><a class="dropdown-item" href="#" >
                                         <div class="row user-infor text-center justify-content-center" style="min-width: 300px;">
-                                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="img-fluid rounded-circle mb-3" style="width: 100px;" alt="Avatar" />
-                                            <h5 class="mb-2"><strong>Ngo Mau Truong</strong></h5>
-                                            <p class="text-muted">Web Fullstack Developer <span class="badge bg-primary">PRO</span></p>
+                                            <img onerror="this.src='../../../public/img/user/avatar_default.png'" src="" class="img-fluid rounded-circle mb-3" style="width: 100px;" alt="Avatar" />
+                                            <h5 class="mb-2"><strong>{{ user.firstname }} {{ user.lastname}}</strong></h5>
+                                            <p class="text-muted">{{ user.email }} <span class="badge bg-primary">{{user.username}}</span></p>
                                         </div>
                                     </a></li>
                                     <li><hr class="dropdown-divider m-2"></li>
@@ -157,6 +157,26 @@ export default {
     },
     setup() {
         const storeUser = useUserStore()
+        // const user = JSON.parse(storeUser.user)
+        let user = ref({})
+        try {
+            user.value = JSON.parse(storeUser.user) || {}
+        } catch (error) {
+            console.error('Error parsing user data:', error)
+        }
+
+        const logout = async () => {
+            authApi.signOut()
+            .then (response => {
+                storeUser.onLogout()
+                router.push({ path: '/login'})
+            })
+            .catch ( err => {
+                console.log(err)
+                storeUser.onLogout()
+                router.push({ path: '/login'})
+            })
+        }
 
         // Handle active navbar
         const route = useRoute()
@@ -193,19 +213,6 @@ export default {
             unreadCount.value = CountNumber
         }
 
-        const logout = async () => {
-            authApi.signOut()
-            .then (response => {
-                storeUser.onLogout()
-                router.push({ path: '/login'})
-            })
-            .catch ( err => {
-                console.log(err)
-                storeUser.onLogout()
-                router.push({ path: '/login'})
-            })
-        }
-
         return {
             isNavCollapse,
             handleShowHide,
@@ -215,7 +222,8 @@ export default {
             isActive,
             handleHide,
             logout,
-            storeUser
+            storeUser,
+            user
         }
     },
 }
@@ -252,7 +260,7 @@ li {
     line-height: 64px;
     text-transform: uppercase;
     font-weight: 700;
-    color: var(--color-blue-dark)
+    color: var(--color-brand)
 }
 
 .navbar .nav-title  {
@@ -261,7 +269,7 @@ li {
 
 .navbar .active {
     font-weight: 600;
-    color: var(--color-blue-dark);
+    color: var(--color-brand);
 }
 
 .active .dropdown-item {
@@ -273,7 +281,7 @@ li {
 }
 
 .navbar .active .bell  {
-    fill: var(--color-blue-dark);
+    fill: var(--color-blue-darkest);
 }
 
 .navbar .bell {
@@ -299,7 +307,7 @@ li {
 }
 
 .menu-toggle svg {
-    fill: var(--color-blue-dark)
+    fill: var(--color-brand)
 }
 
 .nav-link:focus-visible {
@@ -320,10 +328,6 @@ li {
     color: var(--color-gray-dark);
 }
 
-.navbar .item-selection:hover  {
-    font-weight: 600;
-}
-
 .dropdown-divider {
     border: none;
     border-top: 1px solid rgba(0,0,0,.05);
@@ -339,7 +343,7 @@ li {
 }
 
 .btn-login {
-    background-color: var(--color-blue);
+    background-color: var(--color-brand);
     color: var(--color-white);
     font-weight: 600;
     border-radius: 2rem;

@@ -189,7 +189,7 @@ export default {
 }
 
 .progress div {
-    background-color: var(--color-blue-dark);
+    background-color: var(--color-brand);
 }
 
 .congratulation {

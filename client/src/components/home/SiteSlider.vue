@@ -4,11 +4,11 @@
         :modules="modules"
         :loop="true"
         :loop-fill-group-with-blank="true"
-        :pagination="{ clickable: true }"
+        :pagination="{ clickable: true}"
         :autoplay="{ delay: 5000 }"
     >
-        <SwiperSlide class="slide" v-for="index in 5" :key="index">
-            <img :src="`img/slide/slider${index}.png`" />
+        <SwiperSlide class="slide" v-for="index in 3" :key="index">
+            <img :src="`img/slide/Slide${index}.png`" />
         </SwiperSlide>
     </Swiper>
 </template>
@@ -38,7 +38,6 @@ export default defineComponent({
         }
     }
 })
-
 </script>
 
 <style scoped>
@@ -56,4 +55,17 @@ export default defineComponent({
     width: 100%;
     border-radius: 1rem;
 }
+</style>
+
+<style >
+.swiper-pagination-bullet-active {
+    background-color: var(--color-brand);
+}
+
+.swiper-pagination-bullet {
+    border-radius: 0;
+    width: 2.4rem;
+    height: 0.3rem;
+}
+
 </style>

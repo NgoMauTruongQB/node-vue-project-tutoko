@@ -158,7 +158,7 @@ export default {
 }
 
 .header {
-    color: var(--color-blue-darker);
+    color: var(--color-blue-darkest);
 }
 
 .infor {
@@ -203,12 +203,12 @@ export default {
 }
 
 .selection .btn:hover {
-    border-left: 3px solid var(--color-blue);
-    border-bottom: 3px solid var(--color-blue);
+    border-left: 3px solid var(--color-brand);
+    border-bottom: 3px solid var(--color-brand);
 }
 
 .selection svg {
-    fill: var(--color-blue)
+    fill: var(--color-brand)
 }
 
 .add-card {
@@ -232,7 +232,7 @@ export default {
 }
 
 .btn-save-all {
-    background-color: var(--color-blue);
+    background-color: var(--color-brand);
     color: var(--color-white);
 }
 

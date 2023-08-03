@@ -11,13 +11,13 @@
                     </div>
                     <div class="form-group my-3">
                         <label for="password">Password</label>
-                        <router-link to='/forgot-password' style="float:right;font-size:12px;">Forgot password?</router-link>
+                        <router-link to='/forgot-password' style="float:right; font-size:12px; color: var(--color-brand);">Forgot password?</router-link>
                         <input type="password" v-model="password" id="password" class="form-control form-control-sm">
                     </div>
-                    <button type="submit" class="btn btn-primary my-3">Sign in</button>
+                    <button type="submit" class="btn my-3">Sign in</button>
                     
                     <div class="sign-up my-3 text-center">
-                        Don't have an account? <a href="#">Create One</a>
+                        Don't have an account? <a href="#" style="color: var(--color-brand)">Create One</a>
                     </div>
                 </form>
             </div>
@@ -58,8 +58,8 @@ export default {
                 localStorage.setItem('refreshToken', response.refreshToken)
 
                 storeToast.addToast(response.message, 'success', 'Success')
-                storeUser.onLogin(true)
                 router.push({ path: '/'})
+                storeUser.onLogin(true)
             })
             .catch(error => {
                 if (error.response ) {
@@ -110,6 +110,17 @@ form{
 
 .login-form{ 
 	width:330px;
+}
+
+button{
+    background-color: var(--color-brand);
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+button:hover {
+    color: var(--color-white);
+    background-color: var(--color-blue-darkest);
 }
 
 

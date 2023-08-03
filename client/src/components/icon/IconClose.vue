@@ -19,7 +19,7 @@ svg:hover {
 }
 
 svg {
-    fill: var(--color-blue-dark)
+    fill: var(--color-brand)
 }
 
 </style>
