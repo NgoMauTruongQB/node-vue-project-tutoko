@@ -40,7 +40,7 @@ class AuthController {
         }
 
         if (errors.length > 0) {
-            res.json({
+            res.status(500).json({
                 message: errors.join(", "),
             })
             return
@@ -53,7 +53,9 @@ class AuthController {
                 })
             })
             .catch(err => {
-                next(err)
+                res.status(500).json({
+                    message: err.message,
+                })
             })
     }
 

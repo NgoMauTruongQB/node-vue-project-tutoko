@@ -4,7 +4,7 @@ const router = express.Router()
 const authController = require('../controllers/AuthController')
 const authenticated = require('../middlewares/authenticated')
 
-router.post('/register', authController.register)
+router.post('/sign-up', authController.register)
 router.post('/sign-in', authController.login)
 router.post('/sign-out', authController.logout)
 router.get('/refresh-token', authController.refresh)
