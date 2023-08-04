@@ -79,9 +79,15 @@
 import { ref, computed, reactive } from 'vue'
 import useVuelidate from '@vuelidate/core'
 import { maxLength, minLength, required, sameAs, email, helpers } from '@vuelidate/validators'
+import { useToastStore } from '../../stores/toast.js'
+import authApi from '../../api/authApi.js'
+import router from '../../router'
 
 export default {
     setup () {
+        const storeToast = useToastStore()
+
+        // Get data from register form
         const formData = reactive({
             username: '',
             firstname: '',
@@ -92,7 +98,8 @@ export default {
             passwordConfirm: '',
         })
 
-        const phone = helpers.regex(/^[0-9]\d{9}$/)
+        // Validation form register
+        const phoneNumber = helpers.regex(/^[0-9]\d{9}$/)
 
         const rules = computed(() => ({
             username: { 
@@ -108,7 +115,7 @@ export default {
             },
             phone: { 
                 required,
-                phone: helpers.withMessage('Must be a phone number', phone)
+                phoneNumber: helpers.withMessage('Must be a phone number', phoneNumber)
             },
             password: { 
                 required,
@@ -122,12 +129,27 @@ export default {
         
         const v$ = useVuelidate(rules, formData)
 
+        // Check error and call API 
         const register = async () => {
-            const result = await v$.value.$validate();
+            const result = await v$.value.$validate()
             if (result) {
-
-            } else {
-                console.log('Đã xảy ra lỗi cụ thể:', v$.value)
+                var data = {
+                    ...formData,
+                    status: 1,
+                    role: 1,
+                }
+                await authApi.signUp(data) 
+                .then(response => {
+                    storeToast.addToast(response.message, 'success', 'Success')
+                    router.push({ path: '/login'})
+                })
+                .catch(error => {
+                    if (error.response) {
+                        storeToast.addToast(error.response.data.message, 'warning', 'Warning')
+                    } else {
+                        storeToast.addToast(error.message, 'danger', 'Error')
+                    }
+                })
             }
         }
 

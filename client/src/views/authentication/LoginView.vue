@@ -48,7 +48,7 @@ export default {
         const storeUser = useUserStore()
 
         const login = async () => {
-            authApi.signIn({
+            await authApi.signIn({
                 username: username.value,
                 password: password.value
             })
