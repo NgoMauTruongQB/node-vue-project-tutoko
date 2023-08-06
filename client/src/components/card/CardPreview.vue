@@ -7,21 +7,21 @@
                         class="col-11"
                         type="text"
                         autofocus
-                        v-model="inputFront"
+                        v-model="cardProps.reverse_side"
                     >
                 </div>
                 <div v-else class="col-md-5 cell d-flex align-items-center">
-                    {{ inputFront }}
+                    {{ cardProps.reverse_side }}
                 </div>
                 <div v-if="isUpdate" class="col-md-5 d-flex align-items-center justify-content-center">
                     <input 
                         class="col-11"
                         type="text"
-                        v-model="inputBack"
+                        v-model="cardProps.face_side"
                     >
                 </div>
                 <div v-else class="col-md-5 d-flex align-items-center">
-                    {{ inputBack }}
+                    {{ cardProps.face_side }}
                 </div>
                 <div class="col-md-2 d-flex align-items-center justify-content-center">
                     <button class="btn-note mx-1 d-flex align-items-center justify-content-center">
@@ -62,6 +62,10 @@
 import { ref } from 'vue'
 
 export default {
+    name: 'CardPreview',
+    props: {
+        cardProps: Object
+    },
     setup() {
 
         const isUpdate = ref(false)

@@ -18,6 +18,7 @@
     "bootstrap": "^5.3.0",
     "ckeditor": "^4.12.1",
     "ckeditor5-upload-adapter": "^1.0.3",
+    "core-js": "^3.32.0",
     "dotenv": "^16.3.1",
     "json-server": "^0.17.3",
     "pinia": "^2.1.3",

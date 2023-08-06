@@ -2,15 +2,14 @@
     <div style="background-color: var(--color-gray-bg); margin-top: 90px; ">
         <section class="container list-flashcard-home">
             <div class="header">
-                <h2 class="mx-2 py-4 text-center">言葉 - 趣味</h2>
+                <h2 class="mx-2 py-4 text-center">{{ topic }}</h2>
             </div>
             <div class="body">
                 <div class="row mx-2 infor">
                     <div class="col-11 row">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="col-1 img-fluid rounded-circle mb-3" style="width: 80px;" alt="Avatar" />
-                        <div class="col-3">
-                            <p class="m-0">Author</p>
-                            <p class="m-0">Ngo Mau Truong</p>
+                        <div class="col">
+                            <strong class="m-0">Author</strong>
+                            <p class="m-0">{{ name }}</p>
                         </div>
                     </div>
                     <div class="col">
@@ -104,13 +103,10 @@
                     </div>
                     </div>
                     <div class="mx-2">
-                        <h5>Terminology in this course (123)</h5>
+                        <h5>Terminology in this course ({{ setCards.length }})</h5>
                     </div>
-                <div>
-                    <CardPreview />
-                    <CardPreview />
-                    <CardPreview />
-                    <CardPreview />
+                <div v-for="card in setCards" :key="card._id">
+                    <CardPreview :cardProps="card" />
                 </div>
             </div>
         </section>
@@ -120,12 +116,21 @@
 <script>
 import CardPreview from '../../../components/card/CardPreview.vue'
 import { ref } from 'vue'
+import cardApi from '../../../api/cardApi'
+import { useRoute } from 'vue-router'
+import { useToastStore } from '../../../stores/toast'
 
 export default {
     components: { CardPreview },
     setup() {
+        const storeToast = useToastStore()
         const input1 = ref('')
         const isAddCard = ref(false)
+        const route = useRoute()
+        const cardsId = route.params.cardsId
+        const name = ref('')
+        const topic = ref('')
+        const setCards = ref([])
 
         const handleStudy = () => {
             
@@ -140,12 +145,32 @@ export default {
             isAddCard.value = !isAddCard.value
         }
 
+        const getData = async () => {
+            await cardApi.getSetCards(cardsId)
+            .then(response => {
+                name.value = response.name 
+                topic.value = response.topic
+                setCards.value = response.setCards
+            })
+            .catch(error => {
+                if(error.response) {
+                    storeToast.addToast(error.response.data.message, 'danger', 'Error')
+                } else {
+                    storeToast.addToast(error.message, 'danger', 'Error')
+                }
+            })
+        }
+        getData()
+
         return { 
             handleStudy,
             handleEnterKey,
             input1,
             isAddCard,
-            addCard
+            addCard,
+            name,
+            topic,
+            setCards
         }
     }
 }

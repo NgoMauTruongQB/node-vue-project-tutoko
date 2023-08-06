@@ -3,10 +3,9 @@ const Schema = mongoose.Schema
 const ObjectId = Schema.ObjectId
 
 const FlashcardsSchema = new Schema({
-    Id_list_flashcards: { type: Schema.Types.ObjectId },
-    Image: { type: String },
-    Reverse_side: { type: String, required: true },
-    Face_side: { type: String, required: true },
+    id_list_flashcards: { type: Schema.Types.ObjectId },
+    reverse_side: { type: String, required: true },
+    face_side: { type: String, required: true },
 }, {
     timestamps: true
 })

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :style="backgroundStyle">
         <SiteNavBar />
         <main>
             <RouterView />
@@ -16,6 +16,12 @@ export default {
     components: {
         SiteNavBar,
         SiteFooter
+    },
+    computed: {
+        backgroundStyle() {
+            const isCreateSetPage = this.$route.path.includes('/create-set/')
+            return isCreateSetPage ? { backgroundColor: 'var(--color-gray-bg)' } : {}
+        }
     }
 }
 </script>
