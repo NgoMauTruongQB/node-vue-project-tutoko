@@ -1,14 +1,8 @@
 <template>
-    <div style="background-color: var(--color-gray-bg) margin-top: 120px;">
+    <div style="background-color: var(--color-gray-bg); margin-top: 90px; ">
         <div class="container">
-            <h1 class="">言葉</h1>
-            <!-- <div class="d-flex justify-content-center align-items-center">
-                <button class="btn-study btn bg-primary mx-2" @click="handleMode('study')">Study</button>
-                <button class="btn-practice btn bg-primary mx-2" @click="handleMode('practice')">Practice</button>
-            </div> -->
             <div class="main d-flex justify-content-center align-items-center">
-                <FlashCardStudy v-if="mode === 'study'"/>
-                <FlashCardsPractice v-else/>
+                <FlashCardStudy :cardIdProps="cardsId" />
             </div>
         </div>
     </div>
@@ -17,37 +11,18 @@
 <script>
 
 import { ref } from 'vue'
-import axios from 'axios'
-import FlashCardsPractice from '../../../components/card/FlashCardsPractice.vue'
 import FlashCardStudy from '../../../components/card/FlashCardsStudy.vue'
+import { useRoute } from 'vue-router'
 
 export default {
     name: 'FlashCardsView',
-    components: { FlashCardsPractice, FlashCardStudy },
+    components: { FlashCardStudy },
     setup() {
-        // Get all flash cards from API by id
-        const listFlashCard = ref([])
-
-        const getListFlashCard = async () => {
-            try {
-                const res = axios.get('http://localhost:3000/list-cards/')
-                listFlashCard.value = (await res).data
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        getListFlashCard()
-
-        // Handle study or practice mode
-        const mode = ref('study')
-        const handleMode = (modSelect) => {
-            mode.value = modSelect
-        }
+        const route = useRoute()
+        const cardsId = route.params.cardsId
 
         return {
-            listFlashCard,
-            handleMode,
-            mode
+            cardsId,
         }
     }
 }

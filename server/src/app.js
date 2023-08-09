@@ -27,10 +27,13 @@ app.use(helmet())
 app.use(morgan('combined'))
 
 
-
 // DB connection
 const db = require('./config/db')
 db.connect()
+
+// Scheduler Force Delete 
+const cron = require('node-cron')
+require('./middlewares/schedulerForceDelete')
 
 // Routes
 const routes = require('./routes')
@@ -39,5 +42,6 @@ app.use(routes)
 // Using ErrorHandler Middleware
 const errorHandler = require('./middlewares/errorHandler')
 app.use(errorHandler)
+
 
 module.exports = app

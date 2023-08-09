@@ -13,10 +13,10 @@
                     <div class="directional">
                         <div class="back-to-card mx-3 d-flex justify-content-start"> 
                             <IconArrow class=" rotate-180" />
-                            <p class="study my-1 mx-2">Learn again </p>
+                            <p @click="learnAgain" class="study my-1 mx-2">Learn again </p>
                         </div>
                         <div class="mx-3 d-flex justify-content-end"> 
-                            <p class="practice my-1 mx-2"> Practice </p>
+                            <p @click="practiceMode" class="practice my-1 mx-2"> Practice </p>
                             <IconArrow/>
                         </div>
                     </div>
@@ -29,17 +29,18 @@
         <div v-else>
             <div class="d-flex justify-content-center m-1">{{currentSlide}}/{{totalSlides}}</div>
             <Swiper
+                v-if="isDataLoaded"
                 :effect="'cards'"
                 :grabCursor="true"
                 :modules="modules"
-                :cardsEffect="{ perSlideOffset: 1, perSlideRotate: 1, rotate: true, slideShadows: false }" 
+                :cardsEffect="{ perSlideOffset: 1, perSlideRotate: 1, rotate: false, slideShadows: false }" 
                 :shortSwipes="false"
                 :touchMoveStopPropagation="true"
                 @swiper="onSwiperInit"
                 @reachEnd="showCongratulations"
                 @slideChange="onSlideChange"
             >
-                <SwiperSlide class="slide" v-for="flashCard in dataFlashCard" :key="flashCard.id">
+                <SwiperSlide class="slide" v-for="flashCard in listFlashCard" :key="flashCard._id">
                     <FlashCard :flashCardProps="flashCard" />
                 </SwiperSlide>
             </Swiper>
@@ -55,6 +56,14 @@
                 <div class="progress-bar" role="progressbar" :style="{ width: progressWidth}" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
         </div>
+        <div class="mt-5 d-flex justify-content-between">
+            <h5>{{ topic }}</h5>
+            <button @click="showHidePopup" class="btn-share popup">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512">
+                <path d="M208 0H332.1c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9V336c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V48c0-26.5 21.5-48 48-48zM48 128h80v64H64V448H256V416h64v48c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48z"/></svg>
+                <span :class="classShow" class="popuptext" id="myPopup">Copied</span>
+            </button>
+        </div>
     </div>
 </template>
 
@@ -64,7 +73,10 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import { EffectCards} from 'swiper'
 import IconArrow from '../icon/IconArrow.vue'
 import FireWork from '../icon/FireWork.vue'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import cardApi from '../../api/cardApi'
+import { useToastStore } from '../../stores/toast'
+import router from '../../router'
 
 // Import Swiper styles
 import 'swiper/css'
@@ -80,26 +92,40 @@ export default {
         IconArrow,
         FireWork
     },
-    setup() {
-        const dataFlashCard = ref([ 
-            { id:1, faceSide: "犬", reverseSide: "con chó" },
-            { id:2, faceSide: "猫", reverseSide: "con mèo" },
-            { id:3, faceSide: "魚", reverseSide: "con cá" },
-            { id:4, faceSide: "鳥", reverseSide: "con gà" },
-            { id:5, faceSide: "豚", reverseSide: "con heo" },
-            { id:6, faceSide: "牛", reverseSide: "con bò" },
-            { id:7, faceSide: "猿", reverseSide: "con khỉ" },
-            { id:8, faceSide: "鴨", reverseSide: "con vịt" },
-        
-        ])
-
+    props: ['cardIdProps'],
+    setup(props, context) {
+        const storeToast = useToastStore()
         const modules = [ EffectCards ]
         const progressWidth = ref('0%')
         const totalSlides = ref(0)
         const currentSlide = ref(1)
         const isCompleted = ref(false)
-
+        const listFlashCard = ref([])
+        const topic = ref('')
+        const type = ref('')
         let swiperInstance = null
+        const isDataLoaded = ref(false)
+        const classShow = ref(null)
+        const link = computed(() => window.location.href)
+
+        const getData = async () => {
+            await cardApi.studySetCards(props.cardIdProps)
+            .then(response => {
+                topic.value = response.topic 
+                type.value = response.type
+                listFlashCard.value = response.setCards
+                isDataLoaded.value = true
+                context.emit('infor-setcard', { topic: topic.value, type: type.value })
+            })
+            .catch(error => {
+                if(error.response) {
+                    storeToast.addToast(error.response.data.message, 'danger', 'Error')
+                } else {
+                    storeToast.addToast(error.message, 'danger', 'Error')
+                }
+            })
+        }
+        getData()
 
         const onSwiperInit = (swiper) => {
             swiperInstance = swiper
@@ -124,18 +150,48 @@ export default {
             progressWidth.value = `${progress}%`
         }
 
+        const showHidePopup = async () => {
+            classShow.value = 'show'
+            try {
+                await navigator.clipboard.writeText(link.value)
+            } catch (error) {
+                console.error('Copy error:', error)
+            }
+            setTimeout(() => {
+                classShow.value = null
+            }, 2000) 
+        }
+
+        const learnAgain = () => {
+            swiperInstance.slideTo(0, 0)
+            progressWidth.value = '0%'
+            isCompleted.value = false
+        }
+
+        const practiceMode = () => {
+            router.push({ path: `/practice/${props.cardIdProps}`})
+        }
+
         return {
             modules,
             onSwiperInit,
             prevSlide,
             nextSlide,
-            dataFlashCard,
             onSlideChange,
             progressWidth,
             showCongratulations,
             totalSlides,
             currentSlide,
-            isCompleted
+            isCompleted,
+            listFlashCard,
+            getData,
+            isDataLoaded,
+            type,
+            topic,
+            showHidePopup,
+            classShow,
+            learnAgain,
+            practiceMode
         }
     }
 
@@ -231,6 +287,70 @@ export default {
 
 .congratulation .progress {
     height: 2px;
+}
+
+.btn-share {
+    background-color: var(--color-white);
+    border: none;
+    border-radius: 0.8rem;
+    width: 4.6rem;
+    height: 2.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-share:hover svg {
+    scale: 1.2;
+    fill: var(--color-brand);
+}
+
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.popup .popuptext {
+    visibility: hidden;
+    width: 110%;
+    background-color: var(--color-gray-dark);
+    color: var(--color-white);
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60%;
+}
+
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--color-gray-dark) transparent transparent transparent;
+}
+
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+}
+
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
 }
 
 @media screen and (max-width: 1024px) {

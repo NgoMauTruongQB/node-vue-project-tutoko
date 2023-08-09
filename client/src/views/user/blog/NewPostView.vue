@@ -7,22 +7,25 @@
             </div>
         </header>
         <div>
-            <CKEditorCutomer />
+            <CKEditorCustomer />
         </div>
     </div>
 </template>
 
 <script>
-    import CKEditorCutomer from '../../../components/blog/CKEditorCutomer.vue'
+import uploadApi from '../../../api/uploadApi'
+import CKEditorCustomer from '../../../components/blog/CKEditorCustomer.vue'
 
-    export default {
-        name: 'NewPostView',
-        components: { CKEditorCutomer },
-        setup() {
+export default {
+    name: 'NewPostView',
+    components: { CKEditorCustomer },
+    setup() {
 
+        return {
         }
-        
     }
+    
+}
 </script>
 
 <style scoped>
