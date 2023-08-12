@@ -4,56 +4,111 @@ const jwt = require('jsonwebtoken')
 const formidable = require('formidable')
 const path = require('path')
 const fs = require('fs')
+const cloudinary = require('../config/cloudinary')
+const multer = require('multer')
+const { CloudinaryStorage } = require('multer-storage-cloudinary')
+const Users = require('../models/Users')
+const BlogPosts = require('../models/BlogPosts')
+const UsersInformation = require('../models/UsersInformation')
 
+
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'blog',
+        allowedFormats: ["jpg", "jpeg", "png"],
+    },
+})
+
+const upload = multer({
+    storage
+})
 
 class BlogController {
 
     // [POST] /blog/upload-images
     async uploadImage(req, res, next) {
-        var form = new formidable.IncomingForm({
-            uploadDir: path.join(__dirname, '../../uploads/blog'),
-            keepExtensions: true,
-            multiples: true
-        })
-        form.parse(req, (err, fields, files) => {
-            if(err) {
-                res.status(500).json({
-                    message: 'Cannot upload images!'
+        try {
+            upload.fields([{ name: 'file', maxCount: 1 }])(req, res, function (err) {
+                if (err) {
+                    return next(err)
+                }
+                if (!req.files || !req.files['file']) {
+                    return res.status(400).json({ error: 'No file provided' })
+                }
+                const file = req.files['file'][0]
+                const fileUrl = file.path
+                return res.status(200).json({ 
+                    message: 'File uploaded successfully',
+                    fileUrl: fileUrl,
                 })
-            }
-            var arrayOfFiles = files['']
-            if(arrayOfFiles && arrayOfFiles.length > 0) {
-
-                var fileNames = []
-                arrayOfFiles.forEach(file => {
-                    fileNames.push(file.newFilename)
-                })
-                res.status(200).json({
-                    message: 'Upload images successfully!',
-                    data: fileNames,
-                    numberOfImages: fileNames.length
-                })
-            } else {
-                res.status(500).json({
-                    message: 'No images to upload!'
-                })
-            }
-        })
+            });
+        } catch (error) {
+            next(error)
+        }
     }
 
-    // [GET] /blog/open-image
-    async openImage(req, res, next) {
-        let imageName = path.join(__dirname, '../../uploads/blog/' + req.query.image_name)
-        fs.readFile(imageName, (err, imageData) => {
-            if(err) {
-                return next(err)
+    // [GET] /blog/post-blog
+    async getPostBlog(req, res, next) {
+        try {
+            const { id } = await req.body
+            const blogPost = await BlogPosts.findById({ _id: id })
+            if (!blogPost) {
+                return res.status(500).json({
+                    message: 'Post blog not found!'
+                })
             }
-            res.writeHead(200, {'Content-Type': 'image/jpeg'})
-            res.end(imageData)
-        })
-    }
-
+            const author = await Users.findById({ _id: blogPost.author_id})
+            const authorInfor = await UsersInformation.findOne({ User_id: blogPost.author_id })
+            if (!author || !authorInfor) {
+                return res.status(500).json({
+                    message: 'Author not found!'
+                })
+            }
     
+            res.status(200).json({
+                name: authorInfor.firstname + " " + authorInfor.lastname,
+                username: author.username,
+                title: blogPost.title,
+                createdAt: blogPost.createdAt,
+                cover_url: blogPost.cover_url,
+                content: blogPost.content,
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
+    
+
+    // [POST] /blog/post-blog
+    async createPost(req, res, next) {
+        try {
+            const { title, imageSrc, content } = req.body
+            const user = await Users.findById({ _id: req.userId})
+
+            if(user) {
+                const blogPosts = new BlogPosts({
+                    cover_url: imageSrc,
+                    title,
+                    content,
+                    author_id: user._id 
+                })
+                await blogPosts.save()
+                    .then(result => {
+                        res.status(200).json({
+                            message: 'Created successfully!',
+                            result
+                        })
+                    })
+                    .catch(err => {
+                        next(err)
+                    })
+            }
+        } catch (error) {
+            next(error)
+        }
+    }
+
 }
 
 module.exports = new BlogController
