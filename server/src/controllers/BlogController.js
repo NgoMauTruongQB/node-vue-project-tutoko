@@ -51,7 +51,7 @@ class BlogController {
     // [GET] /blog/post-blog
     async getPostBlog(req, res, next) {
         try {
-            const { id } = await req.body
+            const { id } = await req.query
             const blogPost = await BlogPosts.findById({ _id: id })
             if (!blogPost) {
                 return res.status(500).json({
@@ -67,7 +67,7 @@ class BlogController {
             }
     
             res.status(200).json({
-                name: authorInfor.firstname + " " + authorInfor.lastname,
+                name: authorInfor.firstname + ' ' + authorInfor.lastname,
                 username: author.username,
                 title: blogPost.title,
                 createdAt: blogPost.createdAt,
@@ -76,6 +76,30 @@ class BlogController {
             })
         } catch (error) {
             next(error)
+        }
+    }
+
+    // [GET] /blog/list-post
+    async getListPost(req, res, next) {
+        try {
+            const listPost = [];
+    
+            const blogPosts = await BlogPosts.find();
+    
+            for (const post of blogPosts) {
+                const author = await Users.findById(post.author_id);
+                const postBlog = {
+                    author: author.username,
+                    post
+                };
+                listPost.push(postBlog);
+            }
+    
+            return res.status(200).json({
+                listPost: listPost
+            });
+        } catch (error) {
+            next(error);
         }
     }
     
@@ -97,7 +121,7 @@ class BlogController {
                     .then(result => {
                         res.status(200).json({
                             message: 'Created successfully!',
-                            result
+                            id: result._id
                         })
                     })
                     .catch(err => {

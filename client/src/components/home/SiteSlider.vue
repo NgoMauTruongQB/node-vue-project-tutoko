@@ -68,4 +68,9 @@ export default defineComponent({
     height: 0.3rem;
 }
 
+@media screen and (max-width: 512px) {
+    .swiper-pagination-bullet {
+        display: none;
+    }
+}
 </style>

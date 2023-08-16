@@ -1,9 +1,8 @@
 <template>
-    <div>
+    <div class="editor">
         <div class="row d-flex justify-content-center">
-            <!-- <div class="rendered-html" v-html="renderHTML" /> -->
             <div  class="col-lg-7">
-                <quill-editor
+                <QuillEditor
                     :toolbar="toolbarOptions"
                     v-model="content"
                     :options="editorOption"
@@ -15,6 +14,7 @@
                 <SiteButton @click="save" style="width:100px" title="POST" class="me-2"/>
             </div>
         </div>
+        
     </div>
 </template>
 
@@ -34,9 +34,9 @@ export default {
         const content = ref('')
 
         const editorOption = ref({
-            debug: "info",
-            placeholder: "Type your post...",
-            theme: "snow",
+            debug: 'info',
+            placeholder: 'Type your post...',
+            theme: 'snow',
             debug: false,
         })
 
@@ -85,7 +85,6 @@ export default {
             var deltaOps = newContent
             var converter = new QuillDeltaToHtmlConverter(deltaOps.ops, {})
             renderHTML.value = converter.convert()
-
         }
 
         const save = () => {
@@ -109,11 +108,16 @@ export default {
 <style scoped>
 * {
     box-sizing: border-box;
-    overflow:hidden;
 }
 
-.editor {
-    width: 50%;
+</style>
+
+<style >
+.ql-toolbar {
+    position: sticky;
+    top: 97px;
+    background-color: var(--color-white);
+    z-index: 10;
 }
 
 </style>

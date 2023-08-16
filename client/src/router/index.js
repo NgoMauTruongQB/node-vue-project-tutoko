@@ -27,7 +27,7 @@ const routes =  [
     { path: '/practice/:cardsId', component: PracticeView},
     { path: '/new-post', component: NewPostView },
     { path: '/', component: HomeView },
-    { path: '/blog', name: 'blog', component: BlogView},
+    { path: '/blog/:postId', name: 'blog-detail', component: BlogView},
     { path: '/manager', name: 'manager', redirect: { name: 'dashboard'},
         children: [
             { path: 'dashboard', name: 'dashboard', component: DashboardView, meta: { layout: 'ManagerLayout' } },

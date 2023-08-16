@@ -12,6 +12,7 @@
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.3",
     "@vueup/vue-quill": "^1.2.0",
+    "aos": "^2.3.4",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
     "core-js": "^3.32.0",

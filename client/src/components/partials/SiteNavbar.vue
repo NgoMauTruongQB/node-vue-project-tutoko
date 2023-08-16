@@ -4,7 +4,7 @@
 
             <!-- logo & brand name -->
             <router-link to="/" class="navbar-brand d-flex" :class="{ active: isActive('/') }"> 
-                <img src="../../assets/img/logo/wazen4.png" alt="Logo" width="70" class="d-inline-block align-text-top">
+                <img src="../../assets/img/logo/wazen4.png" alt="Logo" class="d-inline-block align-text-top logo">
                 <h3 class="brand p-0 mb-0">Wazen</h3>
             </router-link>
 
@@ -248,7 +248,8 @@ li {
 
 .navbar {
     background-color: #fff;
-    border-bottom: 1px solid #e8ebed;
+    border-bottom: 1px solid #f1f1f1;
+    box-shadow: rgb(1 5 3 / 25%) 0 0 10px -6px, rgb(0 0 0 / 30%) 0 0 1px -8px;
     position: fixed;
     left: 0;
     top: 0;
@@ -256,8 +257,13 @@ li {
     z-index: 3;
 }
 
+.logo {
+    width: 50px;
+    height: 50px;
+}
+
 .navbar .brand {
-    line-height: 64px;
+    line-height: 50px;
     text-transform: uppercase;
     font-weight: 700;
     color: var(--color-brand)

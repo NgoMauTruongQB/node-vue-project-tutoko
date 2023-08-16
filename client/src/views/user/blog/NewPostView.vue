@@ -33,6 +33,7 @@ import blogApi from '../../../api/blogApi.js'
 import { useToastStore } from '../../../stores/toast'
 import pako from 'pako'
 import SiteLoader from '../../../components/partials/SiteLoader.vue'
+import router from '../../../router'
 
 export default {
     components: { Editor, Tab, SiteLoader },
@@ -84,6 +85,9 @@ export default {
             })
             .then(response => {
                 storeToast.addToast(response.message, 'success', 'Success' )
+                const postId = response.id
+                console.log(postId)
+                router.push({ path: `/blog/${postId}`})
             })
             .catch(error => {
                 storeToast.addToast('Oops! Something went wrong!', 'danger', 'Erorr' )
@@ -176,5 +180,4 @@ export default {
 span.validation {
     color: var(--color-brand);
 }
-
 </style>
