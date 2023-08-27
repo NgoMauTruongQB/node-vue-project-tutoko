@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { ref, reactive } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import authApi from '../../api/authApi.js'
 import router from '../../router'
 

@@ -1,6 +1,6 @@
 import instance from "./axios"
 
-const nameModel = '/user'
+const nameModel = '/users'
 
 const userApi = {
     create: async (data) => {
@@ -22,6 +22,12 @@ const userApi = {
     },
     deleteForce: async (id) => {
         return await instance.delete(`${nameModel}/force/${id}`)
+    },
+    changePassword: async (data) => {
+        return await instance.patch(nameModel + '/changePassword', data)
+    },
+    changeInformation: async (data) => {
+        return await instance.patch(nameModel + '/information', data)
     },
 }
 

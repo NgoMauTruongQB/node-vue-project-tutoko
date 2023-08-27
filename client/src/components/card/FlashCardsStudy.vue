@@ -107,7 +107,6 @@ export default {
         const isDataLoaded = ref(false)
         const classShow = ref(null)
         const link = computed(() => window.location.href)
-
         const getData = async () => {
             await cardApi.studySetCards(props.cardIdProps)
             .then(response => {

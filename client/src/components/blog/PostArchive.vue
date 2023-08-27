@@ -14,7 +14,6 @@
         </div>
         <div class="content my-2 mx-1 ">
             <div class="script m-52 justify-content-between">
-                <strong>{{ postProps.post.title }}</strong>
                 <p class="demo-script">{{ postProps.firstParagraph }}</p>
                 <img class="cover-img" :src="postProps.post.cover_url" alt="">
             </div>

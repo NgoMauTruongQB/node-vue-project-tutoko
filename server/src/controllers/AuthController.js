@@ -30,13 +30,13 @@ class AuthController {
 
         const errors = []
         if (await Users.findOne({ username })) {
-            errors.push("Username already exists")
+            errors.push('Username already exists')
         }
         if (await Users.findOne({ email })) {
-            errors.push("Email already exists")
+            errors.push('Email already exists')
         }
         if (await Users.findOne({ phone })) {
-            errors.push("Phone already exists")
+            errors.push('Phone already exists')
         }
 
         if (errors.length > 0) {
@@ -48,7 +48,7 @@ class AuthController {
         await Promise.all([user.save(), usersInformation.save()])
             .then(result => {
                 res.json({
-                    message: "User registered successfully",
+                    message: 'User registered successfully',
                     result
                 })
             })

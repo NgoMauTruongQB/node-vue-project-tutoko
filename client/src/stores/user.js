@@ -17,14 +17,15 @@ export const useUserStore = defineStore('userState', {
             localStorage.setItem('isLogin', true)
             await authApi.getCurrentUser()
                 .then (data => {
-                    const user = {
+                    const updatedUser = {
                         username: data.user.username,
                         firstname: data.usersInformation.firstname,
                         lastname: data.usersInformation.lastname,
                         phone: data.user.phone,
                         email: data.user.email,
+                        avatar: data.usersInformation.avatar,
                     }
-                    localStorage.setItem('site-analytic', JSON.stringify(user))
+                    localStorage.setItem('site-analytic', JSON.stringify(updatedUser))
                 })
                 .catch( error => {
                     handleErrorAndLogout()

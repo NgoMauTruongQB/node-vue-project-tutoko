@@ -76,17 +76,24 @@
                         <!-- Persional -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link " href="#" role="button" data-bs-toggle="dropdown">
-                                    <img 
-                                        src="../../../public/img/user/avatar_default.png" 
+                                    <img v-if="user.avatar"
+                                        :src="user.avatar"
                                         height="50" 
                                         alt="Tutoko Logo"
-                                        :class="['col p-0 logo', isNavCollapse ? 'hide' : '']" 
+                                        :class="['col p-0 logo avatar-circle', isNavCollapse ? 'hide' : '']" 
+                                    />
+                                    <img v-else
+                                        src="../../../public/img/user/avatar_default.png"
+                                        height="50" 
+                                        alt="Tutoko Logo"
+                                        :class="['col p-0 logo avatar-circle', isNavCollapse ? 'hide' : '']" 
                                     />
                                 </a>
                                 <ul :class="[isNavCollapse ? 'px-0' : 'dropdown-menu dropdown-menu-lg-end slide-bottom']" style="positon: abslute">
                                     <li><a class="dropdown-item" href="#" >
-                                        <div class="row user-infor text-center justify-content-center" style="min-width: 300px;">
-                                            <img onerror="this.src='../../../public/img/user/avatar_default.png'" src="" class="img-fluid rounded-circle mb-3" style="width: 100px;" alt="Avatar" />
+                                        <div class="user-infor text-center justify-content-center mt-4" style="min-width: 300px;">
+                                            <img v-if="user.avatar" :src="user.avatar" class="mb-3 avatar-circle2" />
+                                            <img v-else src="../../../public/img/user/avatar_default.png" class="mb-3 avatar-circle2" />
                                             <h5 class="mb-2"><strong>{{ user.firstname }} {{ user.lastname}}</strong></h5>
                                             <p class="text-muted">{{ user.email }} <span class="badge bg-primary">{{user.username}}</span></p>
                                         </div>
@@ -118,7 +125,7 @@
                                     <li><hr class="dropdown-divider m-2"></li>
 
                                     <li @click="handleHide">
-                                        <router-link to="/" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
+                                        <router-link to="/settings" class="dropdown-item item-selection py-2" :class="{ active: isActive('') }"> 
                                             Settings
                                         </router-link>
                                     </li>
@@ -157,7 +164,6 @@ export default {
     },
     setup() {
         const storeUser = useUserStore()
-        // const user = JSON.parse(storeUser.user)
         let user = ref({})
         try {
             user.value = JSON.parse(storeUser.user) || {}
@@ -353,6 +359,20 @@ li {
     color: var(--color-white);
     font-weight: 600;
     border-radius: 2rem;
+}
+
+.avatar-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatar-circle2 {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 @media screen and (max-width: 991px) {

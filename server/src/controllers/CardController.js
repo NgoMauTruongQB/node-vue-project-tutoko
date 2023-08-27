@@ -71,7 +71,7 @@ class CardControllers {
             const flashcards = await Flashcards.find({ id_list_flashcards: id })
     
             res.status(200).json({
-                name: author.firstname + " " + author.lastname,
+                name: author.firstname + ' ' + author.lastname,
                 topic: listFlashCards.topic,
                 type: listFlashCards.type,
                 setCards: flashcards
@@ -322,6 +322,28 @@ class CardControllers {
                 topic: listFlashCards.topic,
                 type: listFlashCards.type,
                 setCards: flashcards
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    // [GET] /card/flashcards-personal
+    async getFlashPersonal(req, res, next) {
+        try {
+            const userId = req.userId
+            
+            await ListsFlashCards.find({ author_id: userId }, { $or: [{ deleted: { $exists: false } }, { deleted: false }] })
+            .then(listsFlashcards => {
+                res.status(200).json({
+                    message: 'Successfully!',
+                    listsFlashcards
+                })
+            })
+            .catch(err => {
+                res.status(500).json({
+                    message: 'Not found!'
+                })
             })
         } catch (error) {
             next(error)

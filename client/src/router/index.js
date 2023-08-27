@@ -14,6 +14,8 @@ import NewPostView from '../views/user/blog/NewPostView.vue'
 import BlogView from '../views/user/blog/BlogView.vue'
 import AddListFlashCardsView from '../views/user/flashCards/AddListFlashCardsView.vue'
 import PracticeView from '../views/user/flashCards/PracticeView.vue'
+import SettingsView from '../views/user/me/SettingsView.vue'
+import BlogArchive from '../views/user/blog/BlogArchiveView.vue'
 
 import DashboardView from '../views/admin/DashboardView.vue'
 
@@ -27,7 +29,9 @@ const routes =  [
     { path: '/practice/:cardsId', component: PracticeView},
     { path: '/new-post', component: NewPostView },
     { path: '/', component: HomeView },
+    { path: '/blog', component: BlogArchive},
     { path: '/blog/:postId', name: 'blog-detail', component: BlogView},
+    { path: '/settings', component: SettingsView},
     { path: '/manager', name: 'manager', redirect: { name: 'dashboard'},
         children: [
             { path: 'dashboard', name: 'dashboard', component: DashboardView, meta: { layout: 'ManagerLayout' } },

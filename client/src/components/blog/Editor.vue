@@ -115,9 +115,9 @@ export default {
 <style >
 .ql-toolbar {
     position: sticky;
-    top: 97px;
+    top: 84px;
     background-color: var(--color-white);
-    z-index: 10;
+    z-index: 2;
 }
 
 </style>

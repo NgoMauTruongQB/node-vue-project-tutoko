@@ -15,6 +15,18 @@ const blogApi = {
     },
     getListBlog: async () => {
         return await instance.get(nameModel + '/list-blog')
+    },
+    likedBlogPost: async (data) => {
+        return await instance.post(nameModel + '/liked', data)
+    },
+    getLikedBlogPost: async (id) => {
+        return await instance.get(`${nameModel}/liked?id=${id}`)
+    },
+    getPostArchive: async () => {
+        return await instance.get(nameModel + '/post-archive')
+    },
+    getPostPersonal: async () => {
+        return await instance.get(nameModel + '/post-personal')
     }
 }
 

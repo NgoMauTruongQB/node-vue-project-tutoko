@@ -42,8 +42,8 @@ export default {
 
         const getListSetCard = async () => {
             await cardApi.getListSetCards()
-            .then(respone => {
-                listSetCard.value = respone.listsFlashcards
+            .then(response => {
+                listSetCard.value = response.listsFlashcards
             })
             .catch(err => {
                 storeToast.addToast('Oops! Something went wrong!','danger', 'Error')
@@ -93,10 +93,17 @@ hr {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     grid-gap: 16px;
+    overflow-x: auto;
 }
 
 .grid-item {
     margin-bottom: 16px;
+}
+
+@media screen and (max-width: 500px) {
+    .grid-container {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
 }
 
 </style>

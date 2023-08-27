@@ -29,6 +29,9 @@ const cardApi = {
     },
     studySetCards: async (id) => {
         return await instance.get(`${nameModel}/study?id=${id}`)
+    },
+    getFlashCardsPersonal: async () => {
+        return await instance.get(nameModel + '/flashcards-personal')
     }
 }
 

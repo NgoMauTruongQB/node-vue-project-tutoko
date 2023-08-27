@@ -64,7 +64,7 @@ export default {
 
 .card {
     border: 1px solid #e4e4e4;
-    border-radius: 10px
+    border-radius: 10px;
 }
 
 .c-details span {

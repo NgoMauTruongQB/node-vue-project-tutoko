@@ -13,6 +13,7 @@ router.patch('/flashcard', authenticated, flashCardController.updateFlashcard)
 router.delete('/flashcard', authenticated, flashCardController.deleteFlashcard)
 router.delete('/list-set-cards', authenticated, flashCardController.deleteSetCards)
 router.get('/study', authenticated, flashCardController.studySetCards)
+router.get('/flashcards-personal', authenticated, flashCardController.getFlashPersonal)
 
 router.get('/trashed-setcards', authenticated, flashCardController.getTrashedSetCards)
 router.put('/restore-setcards', authenticated, flashCardController.restoreSetCards)

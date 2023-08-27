@@ -1,5 +1,5 @@
 <template>
-    <div style="background-color: var(--color-gray-bg); margin-top: 90px; ">
+    <div style="background-color: var(--color-gray-bg); margin-top: 70px; ">
         <div class="container">
             <div class="main d-flex justify-content-center align-items-center">
                 <FlashCardStudy :cardIdProps="cardsId" />

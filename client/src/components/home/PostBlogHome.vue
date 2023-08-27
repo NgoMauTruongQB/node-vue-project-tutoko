@@ -13,7 +13,7 @@
                 <h2 class="title" :key="currentTitle" v-if="currentTitle">{{ currentTitle }}</h2>
             </transition>
             <transition name="showcontent" mode="out-in">
-                <button class="btn-read" :key="currentTitle" v-if="currentTitle">Discover now</button>
+                <button @click="handleDetailPost(currentId)" class="btn-read" :key="currentTitle" v-if="currentTitle">Discover now</button>
             </transition>
         </div>
         <div class="slide-area ">
@@ -57,6 +57,7 @@ import 'swiper/css/pagination'
 import { parseISO, format } from 'date-fns'
 import blogApi from '../../api/blogApi'
 import IconArrow from '../icon/IconArrow.vue'
+import router from '../../router'
 
 export default defineComponent({
     name: 'SiteSilder',
@@ -73,6 +74,7 @@ export default defineComponent({
         const currentTitle = ref('')
         const currentAuthor = ref('')
         const currentPostedDay = ref('')
+        const currentId = ref('')
         let swiperInstance = null
         const totalSlides = ref(0)
         const index = ref(0)
@@ -85,6 +87,7 @@ export default defineComponent({
                 currentTitle.value = listBlog.value[index.value].post.title
                 currentAuthor.value = listBlog.value[index.value].author
                 currentPostedDay.value = format(parseISO(listBlog.value[index.value].post.createdAt), 'dd-MM-yyyy')
+                currentId.value = listBlog.value[index.value].post._id
 
             })
             .catch(error => {
@@ -108,6 +111,7 @@ export default defineComponent({
             currentTitle.value = listBlog.value[index.value].post.title
             currentAuthor.value = listBlog.value[index.value].author
             currentPostedDay.value = format(parseISO(listBlog.value[index.value].post.createdAt), 'dd-MM-yyyy')
+            currentId.value = listBlog.value[index.value].post._id
         }
 
         const displaySlide = (index) => {
@@ -115,6 +119,12 @@ export default defineComponent({
             currentTitle.value = listBlog.value[index].post.title
             currentAuthor.value = listBlog.value[index].author
             currentPostedDay.value = format(parseISO(listBlog.value[index].post.createdAt), 'dd-MM-yyyy')
+            currentId.value = listBlog.value[index].post._id
+        }
+
+        const handleDetailPost = (currentId) => {
+            router.push({ path: `/blog/${currentId}`})
+            window.scrollTo(0, 0)
         }
 
         return {
@@ -128,6 +138,8 @@ export default defineComponent({
             onSwiperInit,
             totalSlides,
             displaySlide,
+            handleDetailPost,
+            currentId
         }
     }
 })
@@ -140,6 +152,7 @@ export default defineComponent({
     /* height: 100vh; */
     background-size: cover;
     position: relative;
+    scroll-behavior: smooth;
 }
 
 .swiper {

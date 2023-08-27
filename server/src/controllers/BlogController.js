@@ -10,7 +10,9 @@ const { CloudinaryStorage } = require('multer-storage-cloudinary')
 const Users = require('../models/Users')
 const BlogPosts = require('../models/BlogPosts')
 const UsersInformation = require('../models/UsersInformation')
-
+const Likes = require('../models/Likes')
+const cheerio = require('cheerio')
+const pako = require('pako')
 
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
@@ -73,6 +75,7 @@ class BlogController {
                 createdAt: blogPost.createdAt,
                 cover_url: blogPost.cover_url,
                 content: blogPost.content,
+                avatar: authorInfor.avatar
             })
         } catch (error) {
             next(error)
@@ -82,28 +85,28 @@ class BlogController {
     // [GET] /blog/list-post
     async getListPost(req, res, next) {
         try {
-            const listPost = [];
+            const listPost = []
     
-            const blogPosts = await BlogPosts.find();
+            const blogPosts = await BlogPosts.find()
     
             for (const post of blogPosts) {
-                const author = await Users.findById(post.author_id);
+                const author = await Users.findById(post.author_id)
+
                 const postBlog = {
                     author: author.username,
-                    post
-                };
-                listPost.push(postBlog);
+                    post,
+                }
+                listPost.push(postBlog)
             }
     
             return res.status(200).json({
                 listPost: listPost
             });
         } catch (error) {
-            next(error);
+            next(error)
         }
     }
     
-
     // [POST] /blog/post-blog
     async createPost(req, res, next) {
         try {
@@ -128,6 +131,144 @@ class BlogController {
                         next(err)
                     })
             }
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    // [POST] /blog/liked
+    async likedPost(req, res, next) {
+        try {
+            const userId = req.userId
+            const isLiked = req.body.isLiked
+            const postId = req.body.postId
+
+            if(isLiked === true) {
+                const likes = await new Likes({
+                    user_id: userId,
+                    post_id: postId
+                })
+                await likes.save()
+                .then(result => {
+                    res.json({
+                        result
+                    })
+                })
+                .catch(err => {
+                    res.status(500).json({
+                        message: err.message,
+                    })
+                })
+            } else {
+                await Likes.findOneAndDelete({
+                    user_id: userId,
+                    post_id: postId
+                })
+                .then(deletedLike => {
+                    res.json({
+                        message: 'Unliked the post',
+                        deletedLike
+                    })
+                })
+                .catch(err => {
+                    res.status(500).json({
+                        message: err.message,
+                    })
+                })
+            }
+
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    // [GET] /blog/liked
+    async getLikedPost(req, res, err) {
+        const userId = req.userId
+        const id = req.query.id
+
+        const liked = Likes.findOne({
+            user_id: userId,
+            post_id: id
+        })
+        .then(result => {
+            res.json({
+                result
+            })
+        })
+        .catch(err => {
+            next(err)
+        })
+    }
+
+    // [GET] /blog/post-archive
+    async getPostArchive(req, res, next) {
+        try {
+            const listPost = []
+    
+            const blogPosts = await BlogPosts.find()
+    
+            for (const post of blogPosts) {
+                const author = await Users.findById(post.author_id)
+                const authorInformation = await UsersInformation.findOne({ User_id: post.author_id})
+                const decompressedData = pako.inflate(post.content, { to: 'string' })
+                const $ = cheerio.load(decompressedData)
+                const firstParagraph = $('p').first().text()
+                const likes = await Likes.find({
+                    post_id: post._id
+                })
+
+                const postBlog = {
+                    author: author.username,
+                    avatar: authorInformation.avatar,
+                    name: authorInformation.firstname + ' ' + authorInformation.lastname,
+                    post,
+                    firstParagraph: firstParagraph,
+                    likeCount: likes.length
+                }
+                listPost.push(postBlog)
+            }
+    
+            return res.status(200).json({
+                listPost: listPost
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    // [GET] /blog/post-personal
+    async getPostPersonal(req, res, next) {
+        try {
+            const userId = req.userId
+            const listPost = []
+    
+            const blogPosts = await BlogPosts.find({author_id: userId})
+    
+            for (const post of blogPosts) {
+                const author = await Users.findById(post.author_id)
+                const authorInformation = await UsersInformation.findOne({ User_id: post.author_id})
+                const decompressedData = pako.inflate(post.content, { to: 'string' })
+                const $ = cheerio.load(decompressedData)
+                const firstParagraph = $('p').first().text()
+                const likes = await Likes.find({
+                    post_id: post._id
+                })
+
+                const postBlog = {
+                    author: author.username,
+                    avatar: authorInformation.avatar,
+                    name: authorInformation.firstname + ' ' + authorInformation.lastname,
+                    post,
+                    firstParagraph: firstParagraph,
+                    likeCount: likes.length
+                }
+                listPost.push(postBlog)
+            }
+    
+            return res.status(200).json({
+                listPost: listPost
+            })
         } catch (error) {
             next(error)
         }
